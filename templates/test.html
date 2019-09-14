@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
+    <style>
+        .map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="../static/images/main.css">
+
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.3.0"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <title>FlaskApp</title>
+</head>
+<body>
+<button onclick="getcoordinates()">Get Coordinates</button>
+<button onclick="addInteraction()">Draw box to define workspace</button>
+<form method="POST">
+    <input type="text" name="X">
+    <input type="text" name="Y">
+    <input type="submit" value="Submit">
+</form>
+<div id="map" class="map">
+</div>
+
+<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+</body>
+<script type="text/javascript" src="{{ url_for('static' , filename ='testmap.js')}}"></script>
+</html>

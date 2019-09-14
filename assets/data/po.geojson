@@ -1,0 +1,20 @@
+{
+"type": "FeatureCollection",
+"name": "po",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "name": "darbogaz_goleti", "X": 637073, "Y": 4149103, "elevation": 1580 }, "geometry": { "type": "Point", "coordinates": [ 34.549846574537654, 37.477089947107224, 1580.0 ] } },
+{ "type": "Feature", "properties": { "name": "Madenkoyu(yol_ustu)", "X": 643208, "Y": 4145985, "elevation": 1790 }, "geometry": { "type": "Point", "coordinates": [ 34.618600259888574, 37.448066208781576, 1790.0 ] } },
+{ "type": "Feature", "properties": { "name": "hasangazi(mezarlik)", "X": 642985, "Y": 4153899, "elevation": 1246 }, "geometry": { "type": "Point", "coordinates": [ 34.61761714714379, 37.519406097335406, 1246.0 ] } },
+{ "type": "Feature", "properties": { "name": "ulukisla", "X": 631366, "Y": 4156697, "elevation": 1453 }, "geometry": { "type": "Point", "coordinates": [ 34.486679935336134, 37.546344982577821, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "Bor", "X": 636481, "Y": 4198231, "elevation": 1215 }, "geometry": { "type": "Point", "coordinates": [ 34.55236065675259, 37.91982122831255, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "Ã‡amardÄ±", "X": 674640, "Y": 4188997, "elevation": 1603 }, "geometry": { "type": "Point", "coordinates": [ 34.984049195203553, 37.830123515195858, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "Altunhisar", "X": 619898, "Y": 4206761, "elevation": 1185 }, "geometry": { "type": "Point", "coordinates": [ 34.365165393024796, 37.999020002411328, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "AyrancÄ±", "X": 561103, "Y": 4135032, "elevation": 1186 }, "geometry": { "type": "Point", "coordinates": [ 33.689587970241945, 37.358421600680131, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "HalkapÄ±nar", "X": 601898, "Y": 4144463, "elevation": 1170 }, "geometry": { "type": "Point", "coordinates": [ 34.151474702214237, 37.439822757257012, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "Emirgazi", "X": 573954, "Y": 4194221, "elevation": 1100 }, "geometry": { "type": "Point", "coordinates": [ 33.840680717117436, 37.890918713847988, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "EreÄŸli", "X": 592647, "Y": 4153687, "elevation": 1046 }, "geometry": { "type": "Point", "coordinates": [ 34.048077083976999, 37.52392182918998, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "NiÄŸde", "X": 647543, "Y": 4202563, "elevation": 1211 }, "geometry": { "type": "Point", "coordinates": [ 34.67905688128257, 37.957121493601683, 0.0 ] } },
+{ "type": "Feature", "properties": { "name": "Eddy_covariance", "X": 632379, "Y": 4153306, "elevation": 1478 }, "geometry": { "type": "Point", "coordinates": [ 34.497851753594247, 37.517131966517219, 0.0 ] } }
+]
+}
