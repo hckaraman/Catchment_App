@@ -55,105 +55,6 @@
 // });
 // map.addControl(layerSwitcher);
 
-var appId = 'NlGDN7VmUR5CEjwlC2h2';
-var appCode = 'oWcExuiIq_UmB4EFUFVNJA';
-var hereLayers = [
-    {
-        base: 'base',
-        type: 'maptile',
-        scheme: 'normal.day',
-        app_id: appId,
-        app_code: appCode
-    },
-    {
-        base: 'base',
-        type: 'maptile',
-        scheme: 'normal.day.transit',
-        app_id: appId,
-        app_code: appCode
-    },
-    {
-        base: 'base',
-        type: 'maptile',
-        scheme: 'pedestrian.day',
-        app_id: appId,
-        app_code: appCode
-    },
-    {
-        base: 'aerial',
-        type: 'maptile',
-        scheme: 'terrain.day',
-        app_id: appId,
-        app_code: appCode
-    },
-    {
-        base: 'aerial',
-        type: 'maptile',
-        scheme: 'satellite.day',
-        app_id: appId,
-        app_code: appCode
-    },
-    {
-        base: 'aerial',
-        type: 'maptile',
-        scheme: 'hybrid.day',
-        app_id: appId,
-        app_code: appCode
-    }
-];
-var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
-    '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
-    '?app_id={app_id}&app_code={app_code}';
-var layers = [];
-var i, ii;
-for (i = 0, ii = hereLayers.length; i < ii; ++i) {
-    var layerDesc = hereLayers[i];
-    layers.push(new ol.layer.Tile({
-        visible: false,
-        preload: Infinity,
-        source: new ol.source.XYZ({
-            url: createUrl(urlTpl, layerDesc),
-            attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
-                '<a href="http://developer.here.com">HERE</a>'
-        })
-    }));
-}
-
-var map = new ol.Map({
-    layers: layers,
-    // Improve user experience by loading tiles while dragging/zooming. Will make
-    // zooming choppy on mobile or slow devices.
-    loadTilesWhileInteracting: true,
-    target: 'map',
-    view: new ol.View({
-        center: ol.proj.fromLonLat([34.42, 39.42]),
-        zoom: 6
-    })
-});
-
-function createUrl(tpl, layerDesc) {
-    return tpl
-        .replace('{base}', layerDesc.base)
-        .replace('{type}', layerDesc.type)
-        .replace('{scheme}', layerDesc.scheme)
-        .replace('{app_id}', layerDesc.app_id)
-        .replace('{app_code}', layerDesc.app_code);
-}
-
-var select = document.getElementById('layer-select');
-
-function onChange() {
-    var scheme = select.value;
-    for (var i = 0, ii = layers.length; i < ii; ++i) {
-        layers[i].setVisible(hereLayers[i].scheme === scheme);
-    }
-}
-
-select.addEventListener('change', onChange);
-onChange();
-
-
-
 
 var source = new ol.source.Vector({wrapX: false});
 
@@ -176,12 +77,23 @@ vector = new ol.layer.Vector({
     })
 });
 
-// function myFunction() {
-//   document.getElementById("myText").value = "Johnny Bravo";
-// }
+// $(function () {
+//     function getcoordinates() {
+//         map.on('singleclick', function (evt) {
+//             // console.log(evt.coordinate);
+//             var x = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
+//             // alert(x[0],x[1])
+//             // var x = evt.coordinate;
+//             document.getElementById("xcor").value = x[0];
+//             document.getElementById("ycor").value = x[1];
+//         });
+//     }
+//
+//     $("#coordinates").click(getcoordinates);
+//     $("#coordinates").click("");
+// });
 
 function getcoordinates() {
-
     map.on('singleclick', function (evt) {
         // console.log(evt.coordinate);
         var x = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
@@ -191,6 +103,14 @@ function getcoordinates() {
         document.getElementById("ycor").value = x[1];
     });
 }
+
+$(document).ready(function () {
+    $('#coordinates').one('click', function (ev) {
+        getcoordinates();
+        return false;
+    });
+});
+
 
 var draw; // global so we can remove it later
 function addInteraction() {
