@@ -8,6 +8,7 @@ import math
 from pyproj import Proj, transform
 from geojson import Polygon
 from area import area
+import zipfile
 
 
 
@@ -73,7 +74,9 @@ def catch(x, y,data_url,out_url):
     # print(Polygon(coords))
     poly = Polygon(coords)
 
-    with fiona.open(out_url, 'w',
+
+
+    with fiona.open(os.path.join(out_url, "catchment.shp"), 'w',
                     driver='ESRI Shapefile',
                     crs=grid.crs.srs,
                     schema=schema) as c:
@@ -102,23 +105,24 @@ def catch(x, y,data_url,out_url):
     # streamNet = gpd.read_file('branches.geojson')
     # streamNet.crs = {'init': 'epsg:23036'}
 
-    # schema = {
-    #     'geometry': 'LineString',
-    #     'properties': {}
-    # }
-    #
-    # with fiona.open('rivers.shp', 'w',
-    #                 driver='ESRI Shapefile',
-    #                 crs=grid.crs.srs,
-    #                 schema=schema) as c:
-    #     i = 0
-    #     for branch in branches['features']:
-    #         rec = {}
-    #         rec['geometry'] = branch['geometry']
-    #         rec['properties'] = {}
-    #         rec['id'] = str(i)
-    #         c.write(rec)
-    #         i += 1
+    schema = {
+        'geometry': 'LineString',
+        'properties': {}
+    }
+    os.path.join(out_url, "rivers.shp")
+
+    with fiona.open(os.path.join(out_url, "rivers.shp"), 'w',
+                    driver='ESRI Shapefile',
+                    crs=grid.crs.srs,
+                    schema=schema) as c:
+        i = 0
+        for branch in branches['features']:
+            rec = {}
+            rec['geometry'] = branch['geometry']
+            rec['properties'] = {}
+            rec['id'] = str(i)
+            c.write(rec)
+            i += 1
 
 
     def convert_wgs_to_utm(lon, lat):
@@ -144,5 +148,16 @@ def catch(x, y,data_url,out_url):
 
     # Area = data_proj.area[0] / 1e6
     Area = area(poly) / 1e6
+
+    file_name = 'rivers.zip'
+
+
+    with zipfile.ZipFile(os.path.join(out_url, file_name), 'w') as file:
+        file.write('rivers.cpg')
+        file.write('rivers.dbf')
+        file.write('rivers.prj')
+        file.write('rivers.shp')
+        file.write('rivers.shx')
+
 
     return Area,utm_code,branches,poly

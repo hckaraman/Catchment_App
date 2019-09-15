@@ -1,45 +1,77 @@
 .btn {
-  border: none;
-  background-color: inherit;
-  padding: 14px 28px;
-  font-size: 16px;
-  cursor: pointer;
-  display: inline-block;
+    border: none;
+    background-color: inherit;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    display: inline-block;
 }
 
-/* On mouse-over */
-.btn:hover {background: #eee;}
+/*#btn {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    padding-right: 15px;*/
+/*    padding-left: 15px;*/
+/*    padding: 14px 28px;*/
+/*    display: inline-block;*/
+/*    margin: auto;*/
+/*}*/
 
-.success {color: green;}
-.info {color: dodgerblue;}
-.warning {color: orange;}
-.danger {color: red;}
-.default {color: black;}
+/* On mouse-over */
+.btn:hover {
+    background: #eee;
+}
+
+.success {
+    color: green;
+}
+
+.info {
+    color: dodgerblue;
+}
+
+.warning {
+    color: orange;
+}
+
+.danger {
+    color: red;
+}
+
+.default {
+    color: black;
+}
 
 #list-holder {
-  position: absolute;
-  left: 10px;
-  top: 120px;
-  z-index: 1;
-  width: 30%;
-  min-height: 200px;
-  max-height: 700px;
-  background-color: rgba(255, 255, 255, 0.8);
-  /*display: none;*/
-  overflow-y: auto;
-  border-radius: 11px;
+    position: absolute;
+    left: 10px;
+    top: 120px;
+    z-index: 1;
+    width: 30%;
+    min-height: 200px;
+    max-height: 700px;
+    background-color: rgba(255, 255, 255, 0.8);
+    /*display: none;*/
+    overflow-y: auto;
+    border-radius: 11px;
 }
 
 #layer-select {
-  position: absolute;
-  left: 20px;
-  top: 90%;
-  z-index: 1;
-  /*width: 30%;*/
-  /*min-height: 200px;*/
-  /*max-height: 700px;*/
-  /*background-color: rgba(255, 255, 255, 0.8);*/
-  /*!*display: none;*!*/
-  overflow-y: auto;
-  border-radius: 11px;
+    position: absolute;
+    left: 20px;
+    top: 90%;
+    z-index: 1;
+    /*width: 30%;*/
+    /*min-height: 200px;*/
+    /*max-height: 700px;*/
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+    /*!*display: none;*!*/
+    overflow-y: auto;
+    border-radius: 11px;
+}
+
+.divider {
+    width: 1px;
+    height: 1px;
+    display: inline-block;
 }

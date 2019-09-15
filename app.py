@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request,render_template, jsonify
+from flask import Flask, jsonify, request,render_template, jsonify,send_file,send_from_directory
 import os
 import numpy as np
 from pysheds.grid import Grid
@@ -13,7 +13,8 @@ app = Flask(__name__)
 
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 data_url = os.path.join(SITE_ROOT, "data", "DEM_4326.tif")
-out_url = os.path.join(SITE_ROOT, "data", "catchment.shp")
+# out_url = os.path.join(SITE_ROOT, "data", "catchment.shp")
+out_url = os.path.join(SITE_ROOT, "data")
 
 @app.route('/', methods=['POST', 'GET'], defaults={'name' : 'Default'})
 @app.route('/home/<string:name>', methods=['POST', 'GET'])
@@ -48,6 +49,12 @@ def process():
     # return '<h1>Area is {} km2 and utm zone is {} </h1>'.format(Area,utm_zone)
     # return render_template('test2.html', area=json.dumps(area))
     return jsonify(Area=Area, UTM=utm_zone, Branch=branches, Polygon=poly)
+
+@app.route('/download')
+def download():
+    return send_from_directory(directory='data', filename="rivers.zip")
+
+
 
 
 if __name__ == '__main__':

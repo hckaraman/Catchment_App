@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
     <style>
         .map {
-            height: 99%;
-            width: 99%;
+            height: 98%;
+            width: 98%;
         }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
@@ -20,18 +20,19 @@
     <script>window.jQuery || document.write('<script src="{{
   url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 
+
     <title>FlaskApp</title>
 </head>
 <body>
 
 <div id="map" class="map"></div>
 <select id="layer-select">
-    <option value="normal.day" selected>Normal Day</option>
-    <option value="normal.day.transit">Normal Day Transit</option>
-    <option value="pedestrian.day">Pedestrian Day</option>
-    <option value="terrain.day">Terrain Day</option>
-    <option value="satellite.day">Satellite Day</option>
-    <option value="hybrid.day">Hybrid Day</option>
+    <option value="normal.day" selected>Normal</option>
+    <option value="normal.day.transit">Normal Transit</option>
+    <option value="pedestrian.day">Pedestrian</option>
+    <option value="terrain.day">Terrain</option>
+    <option value="satellite.day">Satellite</option>
+    <option value="hybrid.day">Hybrid</option>
 </select>
 
 {#<button onclick="getcoordinates()">Get Coordinates</button>#}
@@ -54,7 +55,7 @@
         <ul id="list" class="swing">
             <div class="content" style="max-height: 307px;">
                 <div class="container">
-                    <div class="row p-b-10">
+                    <div class="row p-b-10" id="btn">
                         <div class="col-md-6"><b>X Coordinate :</b>
                             <input id="xcor" type="number"
                                    class="form-control" disabled></div>
@@ -78,13 +79,21 @@
                     class="fas fa-project-diagram"></i></button>
         </div>
         <div class="col-md-12 col-lg-6 p-b-10" id="drawrec" style="visibility: visible;">
-            <button class="btn btn-primary btn-block" onclick="addInteraction()">Draw box to define workspace <i
+            <button class="btn btn-primary btn-block" onclick="addInteraction()">Draw a workspace <i
                     class="fas fa-project-diagram"></i></button>
         </div>
         <div class="col-md-12 col-lg-6 p-b-10" id="calculate" style="visibility: visible;">
             <button class="btn btn-primary btn-block">Submit <i class="fas fa-project-diagram"></i></button>
         </div>
+        <div class="col-md-12 col-lg-6 p-b-10" id="download" style="visibility: visible;">
+            <button class="btn btn-primary btn-block">Download river network <i class="fas fa-project-diagram"></i>
+            </button>
+        </div>
     </div>
+
+    {#    <a href="{{ url_for('data' , filename ='rivers.zip') }}" download> Download JAR </a>#}
+
+    {#    src="{{ url_for('data' , filename ='rivers.zip') }}"#}
 </div>
 
 <script type=text/javascript>
@@ -93,103 +102,6 @@
     {#import View from 'ol/View.js';#}
     {#import TileLayer from 'ol/layer/Tile.js';#}
     {#import XYZ from 'ol/source/XYZ.js';#}
-
-    var appId = 'NlGDN7VmUR5CEjwlC2h2';
-    var appCode = 'oWcExuiIq_UmB4EFUFVNJA';
-    var hereLayers = [
-        {
-            base: 'base',
-            type: 'maptile',
-            scheme: 'normal.day',
-            app_id: appId,
-            app_code: appCode
-        },
-        {
-            base: 'base',
-            type: 'maptile',
-            scheme: 'normal.day.transit',
-            app_id: appId,
-            app_code: appCode
-        },
-        {
-            base: 'base',
-            type: 'maptile',
-            scheme: 'pedestrian.day',
-            app_id: appId,
-            app_code: appCode
-        },
-        {
-            base: 'aerial',
-            type: 'maptile',
-            scheme: 'terrain.day',
-            app_id: appId,
-            app_code: appCode
-        },
-        {
-            base: 'aerial',
-            type: 'maptile',
-            scheme: 'satellite.day',
-            app_id: appId,
-            app_code: appCode
-        },
-        {
-            base: 'aerial',
-            type: 'maptile',
-            scheme: 'hybrid.day',
-            app_id: appId,
-            app_code: appCode
-        }
-    ];
-   var urlTpl = 'https://{1-4}.{base}.maps.cit.api.here.com' +
-        '/{type}/2.1/maptile/newest/{scheme}/{z}/{x}/{y}/256/png' +
-        '?app_id={app_id}&app_code={app_code}';
-    var layers = [];
-    var i, ii;
-    for (i = 0, ii = hereLayers.length; i < ii; ++i) {
-        var layerDesc = hereLayers[i];
-        layers.push(new ol.layer.Tile({
-            visible: false,
-            preload: Infinity,
-            source: new ol.source.XYZ({
-                url: createUrl(urlTpl, layerDesc),
-                attributions: 'Map Tiles &copy; ' + new Date().getFullYear() + ' ' +
-                    '<a href="http://developer.here.com">HERE</a>'
-            })
-        }));
-    }
-
-    var map = new ol.Map({
-        layers: layers,
-        // Improve user experience by loading tiles while dragging/zooming. Will make
-        // zooming choppy on mobile or slow devices.
-        loadTilesWhileInteracting: true,
-        target: 'map',
-        view: new ol.View({
-            center: ol.proj.fromLonLat([34.42, 39.42]),
-            zoom: 6
-        })
-    });
-
-    function createUrl(tpl, layerDesc) {
-        return tpl
-            .replace('{base}', layerDesc.base)
-            .replace('{type}', layerDesc.type)
-            .replace('{scheme}', layerDesc.scheme)
-            .replace('{app_id}', layerDesc.app_id)
-            .replace('{app_code}', layerDesc.app_code);
-    }
-
-    var select = document.getElementById('layer-select');
-
-    function onChange() {
-        var scheme = select.value;
-        for (var i = 0, ii = layers.length; i < ii; ++i) {
-            layers[i].setVisible(hereLayers[i].scheme === scheme);
-        }
-    }
-
-    select.addEventListener('change', onChange);
-    onChange();
 
 </script>
 
@@ -258,10 +170,18 @@
             return false;
         });
     });
+
+    $(function () {
+        $('#download').bind('click', function () {
+            window.location = ($SCRIPT_ROOT + '/download');
+            return false;
+        });
+    });
 </script>
 
 <div id="map" class="map">
 </div>
+
 
 {#<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>#}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
