@@ -42,12 +42,12 @@ def process():
     # location = request.form['Y']
     x = float(name)
     y = float(location)
-    Area, utm_zone, branches = catchment.catch(x,y,data_url,out_url)
+    Area, utm_zone, branches,poly = catchment.catch(x,y,data_url,out_url)
     # area = [{"area": Area}]
 
     # return '<h1>Area is {} km2 and utm zone is {} </h1>'.format(Area,utm_zone)
     # return render_template('test2.html', area=json.dumps(area))
-    return jsonify(Area=Area, UTM=utm_zone, Branch=branches)
+    return jsonify(Area=Area, UTM=utm_zone, Branch=branches, Polygon=poly)
 
 
 if __name__ == '__main__':

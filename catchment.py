@@ -7,7 +7,7 @@ import pyproj
 import math
 from pyproj import Proj, transform
 from geojson import Polygon
-
+from area import area
 
 
 
@@ -45,13 +45,33 @@ def catch(x, y,data_url,out_url):
     nodat = grid.catch.nodata
 
     grid.clip_to('catch')
-
     shapes = grid.polygonize()
 
     schema = {
         'geometry': 'Polygon',
         'properties': {'LABEL': 'float:16'}
     }
+
+    i = 0
+    in_projection = Proj(init='epsg:4326')
+    out_projection = Proj(init='epsg:4326')
+    last_value = 0
+    coords = [[]]
+    # print('Tranformation Started !')
+    # transformation_time = datetime.datetime.now()
+    for shape, value in shapes:
+        if last_value < len(shape['coordinates'][0]):
+            coords[0] = []
+            for index, val in enumerate(shape['coordinates'][0]):
+                coords[0].append([transform(in_projection, out_projection, val[0], val[1])[0],
+                                  transform(in_projection, out_projection, val[0], val[1])[1]])
+            last_value = len(shape['coordinates'][0])
+        else:
+            pass
+    # print('Transformation Finished : ', datetime.datetime.now()-transformation_time)
+
+    # print(Polygon(coords))
+    poly = Polygon(coords)
 
     with fiona.open(out_url, 'w',
                     driver='ESRI Shapefile',
@@ -117,11 +137,12 @@ def catch(x, y,data_url,out_url):
     crs_wgs = pyproj.Proj(init='epsg:4326')  # assuming you're using WGS84 geographic
     crs_utm = pyproj.Proj(init='epsg:{0}'.format(utm_code))
 
-    a = gpd.read_file(out_url)
+    # a = gpd.read_file(out_url)
 
-    data_proj = a.copy()
-    data_proj['geometry'] = data_proj['geometry'].to_crs(epsg=utm_code)
+    # data_proj = a.copy()
+    # data_proj['geometry'] = data_proj['geometry'].to_crs(epsg=utm_code)
 
-    Area = data_proj.area[0] / 1e6
+    # Area = data_proj.area[0] / 1e6
+    Area = area(poly) / 1e6
 
-    return Area,utm_code,branches
+    return Area,utm_code,branches,poly

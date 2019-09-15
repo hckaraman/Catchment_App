@@ -1,55 +1,53 @@
 // create a vector source that loads a GeoJSON file
-var vectorSource = new ol.source.Vector({
-    projection: 'EPSG:4326',
-    url: "{{ url_for('assets' , filename ='r.geojson')}}",
-    format: new ol.format.GeoJSON()
-});
-
-// a vector layer to render the source
-var vectorLayer = new ol.layer.Vector({
-    source: vectorSource
-});
-
-var center = ol.proj.transform([34.6, 37.5], 'EPSG:4326', 'EPSG:3857');
-var view = new ol.View({
-    center: center,
-    zoom: 1
-});
-
-// Create layers instances
-var layerOSM = new ol.layer.Tile({
-    source: new ol.source.OSM(),
-    name: 'OpenStreetMap',
-    title: 'OpenStreetMap'
-});
-
-var layerStamenWater = new ol.layer.Tile({
-    source: new ol.source.Stamen({
-        layer: 'watercolor'
-    }),
-    name: 'Watercolor',
-    title: 'Watercolor'
-});
-var layerStamenTerrain = new ol.layer.Tile({
-    source: new ol.source.Stamen({
-        layer: 'terrain'
-    }),
-    name: 'Terrain',
-    title: 'Terrain'
-
-});
-
-var map = new ol.Map({
-    target: 'map',
-    layers: [
-        new ol.layer.Tile({
-            source: new ol.source.OSM()
-        })],
-    view: new ol.View({
-        center: ol.proj.fromLonLat([34.6, 37.5]),
-        zoom: 12
-    })
-});
+// var vectorSource = new ol.source.Vector({
+//     projection: 'EPSG:4326',
+//     url: "{{ url_for('assets' , filename ='r.geojson')}}",
+//     format: new ol.format.GeoJSON()
+// });
+//
+// // a vector layer to render the source
+// var vectorLayer = new ol.layer.Vector({
+//     source: vectorSource
+// });
+//
+// var center = ol.proj.transform([34.42, 39.42], 'EPSG:4326', 'EPSG:3857');
+// var view = new ol.View({
+//     center: center,
+//     zoom: 1
+// });
+//
+// // Create layers instances
+// var layerOSM = new ol.layer.Tile({
+//     source: new ol.source.OSM(),
+//     name: 'OpenStreetMap',
+//     title: 'OpenStreetMap'
+// });
+//
+// var layerStamenWater = new ol.layer.Tile({
+//     source: new ol.source.Stamen({
+//         layer: 'watercolor'
+//     }),
+//     name: 'Watercolor',
+//     title: 'Watercolor'
+// });
+// var layerStamenTerrain = new ol.layer.Tile({
+//     source: new ol.source.Stamen({
+//         layer: 'terrain'
+//     }),
+//     name: 'Terrain',
+//     title: 'Terrain'
+//
+// });
+//
+// var map = new ol.Map({
+//     target: 'map',
+//     layers: [layerStamenTerrain
+//     ],
+//     view: new ol.View({
+//         center: ol.proj.fromLonLat([34.42, 39.42]),
+//         zoom: 6
+//     })
+// });
 
 // var layerSwitcher = new ol.control.LayerSwitcher({
 //     tipLabel: 'Légende', // Optional label for button

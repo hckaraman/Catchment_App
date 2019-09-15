@@ -29,3 +29,17 @@
   overflow-y: auto;
   border-radius: 11px;
 }
+
+#layer-select {
+  position: absolute;
+  left: 20px;
+  top: 90%;
+  z-index: 1;
+  /*width: 30%;*/
+  /*min-height: 200px;*/
+  /*max-height: 700px;*/
+  /*background-color: rgba(255, 255, 255, 0.8);*/
+  /*!*display: none;*!*/
+  overflow-y: auto;
+  border-radius: 11px;
+}
