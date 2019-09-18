@@ -2,9 +2,10 @@
     border: none;
     background-color: inherit;
     padding: 14px 28px;
-    font-size: 16px;
+    font-size: 12px;
     cursor: pointer;
     display: inline-block;
+    vertical-align: center;
 }
 
 /*#btn {*/
@@ -47,13 +48,15 @@
     left: 10px;
     top: 120px;
     z-index: 1;
-    width: 30%;
+    width: 32%;
+    height: auto;
     min-height: 200px;
     max-height: 700px;
     background-color: rgba(255, 255, 255, 0.8);
     /*display: none;*/
     overflow-y: auto;
     border-radius: 11px;
+    padding-bottom: 2%;
 }
 
 #layer-select {
@@ -74,4 +77,23 @@
     width: 1px;
     height: 1px;
     display: inline-block;
+}
+
+#headerPopup {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#headerPopup iframe {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#list {
+    margin-left: -40px;
+}
+
+#London {
+    padding: 4%;
+    border-radius: 11px;
 }

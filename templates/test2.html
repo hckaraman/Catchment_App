@@ -12,6 +12,7 @@
     {#    <link rel="stylesheet" href="../static/images/main.css">#}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
     <script src="https://unpkg.com/ol-layerswitcher@3.3.0"></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
@@ -35,6 +36,8 @@
     <option value="hybrid.day">Hybrid</option>
 </select>
 
+
+
 {#<button onclick="getcoordinates()">Get Coordinates</button>#}
 {#<button onclick="addInteraction()">Draw box to define workspace</button>#}
 
@@ -45,152 +48,172 @@
 {#    <input type="text" name="area" , id="area">#}
 {#    <input type="text" name="utm" , id="utm">#}
 {#</form>#}
-
-<div class="container box-shadow-light" id="list-holder" style="display: block;">
-    <div class="row">
-        <h3 id="list-header"></h3>
-        <p id="description"></p>
+<div class="container box-shadow-light" id="list-holder" style="display: block;"><h2>Active Tabs</h2>
+    <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'London')">Parameters</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Paris')">Catchments</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Tokyo')">Download</button>
     </div>
-    <div class="row">
-        <ul id="list" class="swing">
-            <div class="content" style="max-height: 307px;">
-                <div class="container">
-                    <div class="row p-b-10" id="btn">
-                        <div class="col-md-6"><b>X Coordinate :</b>
-                            <input id="xcor" type="number"
-                                   class="form-control" disabled></div>
-                        <div class="col-md-6"><b>Y Coordinate</b>
-                            <input id="ycor" type="number"
-                                   class="form-control" disabled></div>
-                        <div class="col-md-6"><b>Area: (km<sup>2</sup>)</b>
-                            <input id="Area" type="number"
-                                   class="form-control" disabled></div>
-                        <div class="col-md-6"><b>UTM Zone </b>
-                            <input id="UTM" type="number"
-                                   class="form-control" disabled></div>
+
+    <div id="London" class="w3-container w3-border city">
+        <div class="row">
+            <h3 id="list-header"></h3>
+            <p id="description"></p>
+        </div>
+        <div class="row">
+            <ul id="list" class="swing">
+                <div class="content" style="max-height: 400px;">
+                    <div class="container">
+                        <div class="row p-b-10" id="btn">
+                            <div class="col-md-6"><b>X Coordinate</b>
+                                <input id="xcor" type="number"
+                                       class="form-control" disabled></div>
+                            <div class="col-md-6"><b>Y Coordinate</b>
+                                <input id="ycor" type="number"
+                                       class="form-control" disabled></div>
+                            <div class="col-md-6"><b>Area: (km<sup>2</sup>)</b>
+                                <input id="Area" type="number"
+                                       class="form-control" disabled></div>
+                            <div class="col-md-6"><b>UTM Zone </b>
+                                <input id="UTM" type="number"
+                                       class="form-control" disabled></div>
+                        </div>
                     </div>
                 </div>
+            </ul>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-block" id="coordinates">Get Coordinates <i
+                        class="fas fa-project-diagram"></i></button>
             </div>
-        </ul>
+            <div class="col">
+                <button class="btn btn-primary btn-block" onclick="addInteraction()">Draw Workspace <i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="w-150"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-block w3-red" id="calculate">Submit <i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" id="download">Download river network<i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="w-150"></div>
+        </div>
+
+
+        <div id="Paris" class="w3-container w3-border city" style="display:none">
+            <h2>Catchments</h2>
+            <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="Tokyo" class="w3-container w3-border city" style="display:none">
+            <h2>Dowload</h2>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 col-lg-6 p-b-10" id="coordinates" style="visibility: visible;">
-            <button class="btn btn-primary btn-block">Get Coordinates <i
-                    class="fas fa-project-diagram"></i></button>
-        </div>
-        <div class="col-md-12 col-lg-6 p-b-10" id="drawrec" style="visibility: visible;">
-            <button class="btn btn-primary btn-block" onclick="addInteraction()">Draw a workspace <i
-                    class="fas fa-project-diagram"></i></button>
-        </div>
-        <div class="col-md-12 col-lg-6 p-b-10" id="calculate" style="visibility: visible;">
-            <button class="btn btn-primary btn-block">Submit <i class="fas fa-project-diagram"></i></button>
-        </div>
-        <div class="col-md-12 col-lg-6 p-b-10" id="download" style="visibility: visible;">
-            <button class="btn btn-primary btn-block">Download river network <i class="fas fa-project-diagram"></i>
-            </button>
-        </div>
-    </div>
 
-    {#    <a href="{{ url_for('data' , filename ='rivers.zip') }}" download> Download JAR </a>#}
 
-    {#    src="{{ url_for('data' , filename ='rivers.zip') }}"#}
-</div>
 
-<script type=text/javascript>
-    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-    {#import Map from 'ol/Map.js';#}
-    {#import View from 'ol/View.js';#}
-    {#import TileLayer from 'ol/layer/Tile.js';#}
-    {#import XYZ from 'ol/source/XYZ.js';#}
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
 
-</script>
+    <script type=text/javascript>
+        $(function () {
+            $('#calculate').bind('click', function () {
+                $.getJSON($SCRIPT_ROOT + '/process', {
+                    X: $("#xcor").val(),
+                    Y: $("#ycor").val()
+                }, function (data) {
+                    {#$("#area").text(data.Area);#}
+                    $("#Area").val(data.Area);
+                    $("#UTM").val(data.UTM);
 
-<script type=text/javascript>
-    $(function () {
-        $('#calculate').bind('click', function () {
-            $.getJSON($SCRIPT_ROOT + '/process', {
-                X: $("#xcor").val(),
-                Y: $("#ycor").val()
-            }, function (data) {
-                {#$("#area").text(data.Area);#}
-                $("#Area").val(data.Area);
-                $("#UTM").val(data.UTM);
+                    var routeJSON = data.Branch;
 
-                var routeJSON = data.Branch;
+                    var format = new ol.format.GeoJSON({
+                        featureProjection: "EPSG:3857"
+                    });
 
-                var format = new ol.format.GeoJSON({
-                    featureProjection: "EPSG:3857"
-                });
+                    var vectorSource = new ol.source.Vector({
+                        features: format.readFeatures(routeJSON)
+                    });
 
-                var vectorSource = new ol.source.Vector({
-                    features: format.readFeatures(routeJSON)
-                });
-
-                var vectorLayer = new ol.layer.Vector({
-                    source: vectorSource,
-                    style: new ol.style.Style({
-                        stroke: new ol.style.Stroke({
-                            color: 'red',
-                            width: 3
+                    var vectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                        style: new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: 'red',
+                                width: 3
+                            })
                         })
-                    })
-                });
+                    });
 
-                map.addLayer(vectorLayer);
+                    map.addLayer(vectorLayer);
 
-                var routeJSON = data.Polygon;
+                    var routeJSON = data.Polygon;
 
-                var format = new ol.format.GeoJSON({
-                    featureProjection: "EPSG:3857"
-                });
+                    var format = new ol.format.GeoJSON({
+                        featureProjection: "EPSG:3857"
+                    });
 
-                var vectorSource = new ol.source.Vector({
-                    features: format.readFeatures(routeJSON)
-                });
+                    var vectorSource = new ol.source.Vector({
+                        features: format.readFeatures(routeJSON)
+                    });
 
-                var vectorLayer = new ol.layer.Vector({
-                    source: vectorSource,
-                    style: new ol.style.Style({
-                        stroke: new ol.style.Stroke({
-                            color: 'blue',
-                            width: 3
+                    var vectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                        style: new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: 'blue',
+                                width: 3
+                            })
                         })
-                    })
+                    });
+
+                    map.addLayer(vectorLayer);
+
+
+                    var ext = vectorSource.getExtent();
+                    {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
+                    {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
+                    map.getView().fit(ext, map.getSize());
+
                 });
-
-                map.addLayer(vectorLayer);
-
-
-                var ext = vectorSource.getExtent();
-                {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
-                {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
-                map.getView().fit(ext, map.getSize());
-
+                return false;
             });
-            return false;
         });
-    });
 
-    $(function () {
-        $('#download').bind('click', function () {
-            window.location = ($SCRIPT_ROOT + '/download');
-            return false;
+        $(function () {
+            $('#download').bind('click', function () {
+                window.location = ($SCRIPT_ROOT + '/download');
+                return false;
+            });
         });
-    });
-</script>
-
-<div id="map" class="map">
-</div>
 
 
-{#<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>#}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+    </script>
+
+    <div id="map" class="map">
+    </div>
+
+
+    {#<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 </body>
 <script type="text/javascript" src="{{ url_for('static' , filename ='testmap2.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static' , filename ='basemap.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='draw.js') }}"></script>
 </html>
