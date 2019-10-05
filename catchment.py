@@ -11,15 +11,14 @@ from area import area
 import zipfile
 
 
-
-def catch(x, y,data_url,out_url):
+def catch(x1,y1,x2,y2,data_url,out_url):
 
     # os.chdir(r'D:\Data\SRTM_TR')
     # os.chdir(r'D:\ASTER')
 
     grid = Grid.from_raster(data_url, data_name='dem')
     distance = 1
-    window = (x - distance * 0.5, y - distance * 0.5, x + distance * 0.5, y + distance * 0.5)
+    window = (x1,y1,x2,y2)
     grid.set_bbox(window)
     grid.read_raster(data_url, data_name='dem', window=grid.bbox,
                      window_crs=grid.crs)
@@ -93,7 +92,7 @@ def catch(x, y,data_url,out_url):
     grid.clip_to('catch')
     grid.accumulation(data='catch', dirmap=dirmap, pad_inplace=False, out_name='acc')
     grid.catch.nodata = -9223372036854775808
-    branches = grid.extract_river_network('catch', 'acc', threshold=1500, dirmap=dirmap)
+    branches = grid.extract_river_network('catch', 'acc', threshold=50, dirmap=dirmap)
 
     # def saveDict(dic, file):
     #     f = open(file, 'w')
@@ -136,13 +135,12 @@ def catch(x, y,data_url,out_url):
         return epsg_code
 
 
-    input_lon, input_lat = x, y
+    input_lon, input_lat = x1, y1
     utm_code = convert_wgs_to_utm(input_lon, input_lat)
     crs_wgs = pyproj.Proj(init='epsg:4326')  # assuming you're using WGS84 geographic
     crs_utm = pyproj.Proj(init='epsg:{0}'.format(utm_code))
 
     # a = gpd.read_file(out_url)
-
     # data_proj = a.copy()
     # data_proj['geometry'] = data_proj['geometry'].to_crs(epsg=utm_code)
 
@@ -153,11 +151,11 @@ def catch(x, y,data_url,out_url):
 
 
     with zipfile.ZipFile(os.path.join(out_url, file_name), 'w') as file:
-        file.write('rivers.cpg')
-        file.write('rivers.dbf')
-        file.write('rivers.prj')
-        file.write('rivers.shp')
-        file.write('rivers.shx')
+        file.write(os.path.join(out_url, 'rivers.cpg'))
+        file.write(os.path.join(out_url, 'rivers.dbf'))
+        file.write(os.path.join(out_url, 'rivers.prj'))
+        file.write(os.path.join(out_url, 'rivers.shp'))
+        file.write(os.path.join(out_url, 'rivers.shx'))
 
 
     return Area,utm_code,branches,poly

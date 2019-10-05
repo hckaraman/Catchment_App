@@ -99,3 +99,5 @@ function onChange() {
 
 select.addEventListener('change', onChange);
 onChange();
+
+// map.addControl(new ol.control.LayerSwitcher());

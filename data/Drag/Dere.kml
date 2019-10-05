@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom">
+<Document>
+	<name>Dere.kmz</name>
+	<open>1</open>
+	<Style id="s_ylw-pushpin100">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>2</width>
+		</LineStyle>
+	</Style>
+	<Style id="s_ylw-pushpin_hl000">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+		<LineStyle>
+			<color>ffff0000</color>
+			<width>2</width>
+		</LineStyle>
+	</Style>
+	<StyleMap id="m_ylw-pushpin10">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin100</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl000</styleUrl>
+		</Pair>
+	</StyleMap>
+	<StyleMap id="m_ylw-pushpin000">
+		<Pair>
+			<key>normal</key>
+			<styleUrl>#s_ylw-pushpin00</styleUrl>
+		</Pair>
+		<Pair>
+			<key>highlight</key>
+			<styleUrl>#s_ylw-pushpin_hl10</styleUrl>
+		</Pair>
+	</StyleMap>
+	<Style id="s_ylw-pushpin_hl10">
+		<IconStyle>
+			<scale>1.3</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Style id="s_ylw-pushpin00">
+		<IconStyle>
+			<scale>1.1</scale>
+			<Icon>
+				<href>http://maps.google.com/mapfiles/kml/pushpin/ylw-pushpin.png</href>
+			</Icon>
+			<hotSpot x="20" y="2" xunits="pixels" yunits="pixels"/>
+		</IconStyle>
+	</Style>
+	<Document>
+		<name>Dere.shp</name>
+		<open>1</open>
+		<Schema name="Dere" id="S_Dere_SSSI">
+			<SimpleField type="string" name="NAME"><displayName>&lt;b&gt;NAME&lt;/b&gt;</displayName>
+</SimpleField>
+			<SimpleField type="string" name="LAYER"><displayName>&lt;b&gt;LAYER&lt;/b&gt;</displayName>
+</SimpleField>
+			<SimpleField type="string" name="KML_STYLE"><displayName>&lt;b&gt;KML_STYLE&lt;/b&gt;</displayName>
+</SimpleField>
+			<SimpleField type="int" name="tessellate"><displayName>&lt;b&gt;tessellate&lt;/b&gt;</displayName>
+</SimpleField>
+		</Schema>
+		<Style id="style21">
+			<BalloonStyle>
+				<text><![CDATA[<table border="0">
+  <tr><td><b>NAME</b></td><td>$[Dere/NAME]</td></tr>
+  <tr><td><b>LAYER</b></td><td>$[Dere/LAYER]</td></tr>
+  <tr><td><b>KML_STYLE</b></td><td>$[Dere/KML_STYLE]</td></tr>
+  <tr><td><b>tessellate</b></td><td>$[Dere/tessellate]</td></tr>
+</table>]]></text>
+			</BalloonStyle>
+			<LineStyle>
+				<color>ffff0000</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>ff0000ff</color>
+			</PolyStyle>
+		</Style>
+		<StyleMap id="style20">
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#style2</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#style21</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id="style2">
+			<BalloonStyle>
+				<text><![CDATA[<table border="0">
+  <tr><td><b>NAME</b></td><td>$[Dere/NAME]</td></tr>
+  <tr><td><b>LAYER</b></td><td>$[Dere/LAYER]</td></tr>
+  <tr><td><b>KML_STYLE</b></td><td>$[Dere/KML_STYLE]</td></tr>
+  <tr><td><b>tessellate</b></td><td>$[Dere/tessellate]</td></tr>
+</table>]]></text>
+			</BalloonStyle>
+			<LineStyle>
+				<color>ffff0000</color>
+				<width>2</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>ff0000ff</color>
+			</PolyStyle>
+		</Style>
+		<Folder id="layer 0">
+			<name>Dere</name>
+			<Placemark>
+				<styleUrl>#style20</styleUrl>
+				<ExtendedData>
+					<SchemaData schemaUrl="#S_Dere_SSSI">
+						<SimpleData name="NAME">Dere</SimpleData>
+						<SimpleData name="LAYER">Unknown Line Type</SimpleData>
+						<SimpleData name="KML_STYLE">m_ylw-pushpin</SimpleData>
+						<SimpleData name="tessellate">1</SimpleData>
+					</SchemaData>
+				</ExtendedData>
+				<LineString>
+					<coordinates>
+						40.84676184598146,39.15956773202441,0 40.84608557347907,39.15987407154129,0 40.84607331616838,39.15987503503082,0 40.84569603370547,39.15993913777633,0 40.84564208617363,39.15993417567348,0 40.84559994999565,39.15992821934042,0 40.84513256623183,39.15988823547723,0 40.84458839915308,39.15979641786412,0 40.84455607494117,39.15978459237677,0 40.84378485481513,39.15966117123595,0 40.84313017379525,39.15956624378688,0 40.8426924584193,39.15929361711065,0 40.84189229169498,39.15900472448011,0 40.84187945467386,39.15900092107044,0 40.84063344032548,39.1586761409751,0 40.84015346805239,39.15855033971945,0 40.83957558190774,39.15845641138154,0 40.83891974913025,39.15841688096273,0 40.83840379511705,39.15832742962771,0 40.83811579415538,39.15819127388959,0 40.83762531059209,39.15787867179985,0 40.83714667216092,39.15758124958,0 40.83685331880947,39.15740954613126,0 40.83683846443246,39.15740219264021,0 40.8367888173214,39.15738494087283,0 40.83644376088442,39.15728599557532,0 40.83638880658698,39.15729191669443,0 40.83631821671112,39.15727873734706,0 40.83627603706303,39.15727288889801,0 40.83603614037715,39.1572682637274,0 40.83600674352728,39.15727058754071,0 40.83596864559583,39.15726843956607,0 40.83579013594864,39.15735233552685,0 40.83578295721364,39.15736623528227,0 40.83577578779246,39.1573801157036,0 40.83572949675278,39.15750742452729,0 40.83498092749164,39.1582961188664,0 40.83470984219319,39.15838892803316,0 40.83430755480818,39.15834630535605,0 40.83394250634801,39.15823704428478,0 40.83389890981542,39.1582216118269,0 40.83355740891375,39.15808841834314,0 40.83334256009066,39.15787031839844,0 40.83333679212767,39.15785673950843,0 40.83332921809318,39.15765836421472,0 40.83332748170391,39.15764406586546,0 40.83363251101621,39.15694865948294,0 40.83384333019196,39.15680655097197,0 40.83388703811276,39.15649566782391,0 40.83362250914443,39.15511600771659,0 40.83365379837396,39.15402242594153,0 40.83379571516795,39.15336072698431,0 40.83389757445232,39.15281776598515,0 40.83374826085204,39.15202029884326,0 40.83388666354778,39.15178602755502,0 40.83397673042666,39.15136424212871,0 40.83394294839641,39.1508640882446,0 40.83367346520301,39.15050440474894,0 40.83347995368295,39.15022167519577,0 40.83314730650319,39.15005302607653,0 40.83269541294662,39.14994676256718,0 40.83197085899918,39.15007689697579,0 40.83154660037911,39.15025977676474,0 40.83151410876071,39.1502862031716,0 40.8312468580537,39.15047112372616,0 40.83122043959021,39.15047781642583,0 40.83085903511982,39.15041799216936,0 40.83069538208817,39.14996479787835,0 40.83060407635032,39.14951713605066,0 40.8301955580206,39.14920731433574,0 40.8298732010088,39.14899926267496,0 40.8295316482992,39.14873029029019,0 40.82952540605844,39.14847321173307,0 40.82958071494694,39.14831507559241,0 40.82972351779181,39.14791974456945,0 40.83006988757687,39.14773249291387,0 40.83047564422047,39.14745536283783,0 40.83068422871646,39.14721607275859,0 40.83070497983869,39.14695974958403,0 40.83050112395456,39.14660903810552,0 40.83037125227822,39.14639189575682,0 
+					</coordinates>
+				</LineString>
+			</Placemark>
+		</Folder>
+	</Document>
+	<Placemark>
+		<name>Dere</name>
+		<styleUrl>#m_ylw-pushpin10</styleUrl>
+		<LineString>
+			<tessellate>1</tessellate>
+			<coordinates>
+				40.84836049725157,39.159147479573,0 40.84805055085562,39.15916083389404,0 40.84761452061852,39.15927880304534,0 40.84717930168056,39.15940779251788,0 40.84714851463301,39.15941012595461,0 40.84665842301184,39.15960739742648,0 40.84608557347909,39.15987407154128,0 40.8460733161684,39.15987503503082,0 40.84569603370547,39.15993913777636,0 40.84564208617363,39.15993417567349,0 40.84559994999568,39.15992821934042,0 40.84513256623183,39.15988823547727,0 40.84458839915308,39.15979641786414,0 40.84455607494115,39.15978459237675,0 40.84378485481511,39.15966117123595,0 40.84313017379529,39.15956624378689,0 40.84269245841932,39.15929361711066,0 40.84189229169498,39.1590047244801,0 40.84187945467386,39.15900092107047,0 40.84063344032548,39.1586761409751,0 40.84015346805239,39.15855033971947,0 40.83957558190775,39.15845641138158,0 40.83891974913025,39.15841688096273,0 40.83840379511705,39.15832742962771,0 40.83811579415536,39.1581912738896,0 40.83762531059211,39.15787867179985,0 40.83714667216092,39.15758124958002,0 40.83685331880947,39.15740954613129,0 40.83683846443246,39.15740219264021,0 40.83678881732142,39.15738494087284,0 40.83644376088444,39.15728599557531,0 40.836388806587,39.15729191669445,0 40.83631821671114,39.15727873734707,0 40.83627603706304,39.15727288889801,0 40.83603614037717,39.15726826372743,0 40.83600674352731,39.15727058754072,0 40.83596864559581,39.15726843956607,0 40.83579013594864,39.15735233552685,0 40.83578295721364,39.15736623528229,0 40.83577578779248,39.15738011570362,0 40.83572949675278,39.15750742452731,0 40.83498092749166,39.15829611886642,0 40.83470984219319,39.15838892803318,0 40.83430755480821,39.15834630535606,0 40.83394250634802,39.15823704428475,0 40.83389890981542,39.15822161182693,0 40.83355740891375,39.15808841834316,0 40.83334256009066,39.15787031839844,0 40.83333679212765,39.15785673950846,0 40.83332921809318,39.15765836421472,0 40.83332748170391,39.15764406586548,0 40.83363251101622,39.15694865948294,0 40.83384333019194,39.15680655097201,0 40.83388703811279,39.15649566782391,0 40.83362250914447,39.15511600771658,0 40.83365379837398,39.15402242594152,0 40.83379571516797,39.15336072698434,0 40.83389757445234,39.15281776598518,0 40.83374826085202,39.15202029884328,0 40.8338866635478,39.15178602755502,0 40.83397673042666,39.15136424212869,0 40.83394294839643,39.15086408824464,0 40.83367346520303,39.15050440474894,0 40.83347995368298,39.15022167519577,0 40.83314730650321,39.15005302607656,0 40.83269541294666,39.14994676256722,0 40.8319708589992,39.15007689697579,0 40.83154660037913,39.15025977676476,0 40.83151410876069,39.15028620317164,0 40.8312468580537,39.15047112372617,0 40.83122043959023,39.15047781642586,0 40.83085903511984,39.15041799216937,0 40.83069538208815,39.14996479787835,0 40.83060407635032,39.14951713605068,0 40.8301955580206,39.14920731433576,0 40.82987320100883,39.148999262675,0 40.8295316482992,39.14873029029021,0 40.82952540605845,39.14847321173306,0 40.82958071494692,39.14831507559241,0 40.82972351779183,39.14791974456947,0 40.8300698875769,39.1477324929139,0 40.83047564422049,39.14745536283781,0 40.83068422871649,39.14721607275861,0 40.83070497983869,39.14695974958403,0 40.83050112395457,39.14660903810555,0 40.83037125227822,39.14639189575686,0 
+			</coordinates>
+		</LineString>
+	</Placemark>
+	<Placemark>
+		<name>Memba</name>
+		<LookAt>
+			<longitude>40.84152702184645</longitude>
+			<latitude>39.15366529118423</latitude>
+			<altitude>0</altitude>
+			<heading>-20.26547948512427</heading>
+			<tilt>33.68238559100881</tilt>
+			<range>2596.207737509872</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.84657924985891,39.15948680160449,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>Mansap</name>
+		<LookAt>
+			<longitude>40.84231549503447</longitude>
+			<latitude>39.1533811567199</latitude>
+			<altitude>0</altitude>
+			<heading>-6.418253512261607</heading>
+			<tilt>25.73934237439457</tilt>
+			<range>3513.422741434686</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.83042107345996,39.14634274830685,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>3+000</name>
+		<LookAt>
+			<longitude>40.84224262804784</longitude>
+			<latitude>39.15565406854358</latitude>
+			<altitude>0</altitude>
+			<heading>-20.2650277874046</heading>
+			<tilt>33.68574913611391</tilt>
+			<range>3272.098070219921</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.84659859112166,39.15944181163096,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>2+500</name>
+		<LookAt>
+			<longitude>40.84505434434496</longitude>
+			<latitude>39.16006374829824</latitude>
+			<altitude>0</altitude>
+			<heading>0.004351211682281487</heading>
+			<tilt>45.00157738049749</tilt>
+			<range>3711.570692028188</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.84129054680869,39.15893676080905,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>2+000</name>
+		<LookAt>
+			<longitude>40.84505434434496</longitude>
+			<latitude>39.16006374829824</latitude>
+			<altitude>0</altitude>
+			<heading>0.004351211682281487</heading>
+			<tilt>45.00157738049749</tilt>
+			<range>3711.570692028188</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.83592197793035,39.15736565076732,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>1+500</name>
+		<LookAt>
+			<longitude>40.84505434434496</longitude>
+			<latitude>39.16006374829824</latitude>
+			<altitude>0</altitude>
+			<heading>0.004351211682281487</heading>
+			<tilt>45.00157738049749</tilt>
+			<range>3711.570692028188</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.8337504669548,39.15643046960913,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>1+000</name>
+		<LookAt>
+			<longitude>40.84505434434496</longitude>
+			<latitude>39.16006374829824</latitude>
+			<altitude>0</altitude>
+			<heading>0.004351211682281487</heading>
+			<tilt>45.00157738049749</tilt>
+			<range>3711.570692028188</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.83381389997584,39.15203918724447,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>0+500</name>
+		<LookAt>
+			<longitude>40.84361241346166</longitude>
+			<latitude>39.1533473932592</latitude>
+			<altitude>0</altitude>
+			<heading>0.003440711978436499</heading>
+			<tilt>45.00118514919457</tilt>
+			<range>3649.777171695745</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.83054715361036,39.15017465912899,0</coordinates>
+		</Point>
+	</Placemark>
+	<Placemark>
+		<name>0+000</name>
+		<LookAt>
+			<longitude>40.84361241346166</longitude>
+			<latitude>39.1533473932592</latitude>
+			<altitude>0</altitude>
+			<heading>0.003440711978436499</heading>
+			<tilt>45.00118514919457</tilt>
+			<range>3649.777171695745</range>
+			<gx:altitudeMode>relativeToSeaFloor</gx:altitudeMode>
+		</LookAt>
+		<styleUrl>#m_ylw-pushpin000</styleUrl>
+		<Point>
+			<gx:drawOrder>1</gx:drawOrder>
+			<coordinates>40.83039752679916,39.14635517152615,0</coordinates>
+		</Point>
+	</Placemark>
+</Document>
+</kml>

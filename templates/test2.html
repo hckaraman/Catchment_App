@@ -18,6 +18,8 @@
     <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.4.0"></script>
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@3.4.0/src/ol-layerswitcher.css"/>
     <script>window.jQuery || document.write('<script src="{{
   url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
 
@@ -27,6 +29,7 @@
 <body>
 
 <div id="map" class="map"></div>
+<div id="info">&nbsp;</div>
 <select id="layer-select">
     <option value="normal.day" selected>Normal</option>
     <option value="normal.day.transit">Normal Transit</option>
@@ -35,7 +38,6 @@
     <option value="satellite.day">Satellite</option>
     <option value="hybrid.day">Hybrid</option>
 </select>
-
 
 
 {#<button onclick="getcoordinates()">Get Coordinates</button>#}
@@ -83,13 +85,23 @@
             </ul>
         </div>
 
+        <input id="x1" type="number"
+               class="form-control" hidden>
+        <input id="y1" type="number"
+               class="form-control" hidden>
+        <input id="x2" type="number"
+               class="form-control" hidden>
+        <input id="y2" type="number"
+               class="form-control" hidden>
+
+
         <div class="row">
             <div class="col">
                 <button class="btn btn-primary btn-block" id="coordinates">Get Coordinates <i
                         class="fas fa-project-diagram"></i></button>
             </div>
             <div class="col">
-                <button class="btn btn-primary btn-block" onclick="addInteraction()">Draw Workspace <i
+                <button class="btn btn-primary btn-block" id="draw">Draw Workspace <i
                         class="fas fa-project-diagram"></i></button>
             </div>
             <div class="w-150"></div>
@@ -107,113 +119,47 @@
             <div class="w-150"></div>
         </div>
 
-
-        <div id="Paris" class="w3-container w3-border city" style="display:none">
-            <h2>Catchments</h2>
-            <p>Paris is the capital of France.</p>
-        </div>
-
-        <div id="Tokyo" class="w3-container w3-border city" style="display:none">
-            <h2>Dowload</h2>
-            <p>Tokyo is the capital of Japan.</p>
-        </div>
     </div>
+    <div id="Paris" class="w3-container w3-border city" style="display:none"></div>
 
+
+    <div id="Tokyo" class="w3-container w3-border city" style="display:none">
+        <h2>Dowload</h2>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
 
 
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
 
-    <script type=text/javascript>
-        $(function () {
-            $('#calculate').bind('click', function () {
-                $.getJSON($SCRIPT_ROOT + '/process', {
-                    X: $("#xcor").val(),
-                    Y: $("#ycor").val()
-                }, function (data) {
-                    {#$("#area").text(data.Area);#}
-                    $("#Area").val(data.Area);
-                    $("#UTM").val(data.UTM);
-
-                    var routeJSON = data.Branch;
-
-                    var format = new ol.format.GeoJSON({
-                        featureProjection: "EPSG:3857"
-                    });
-
-                    var vectorSource = new ol.source.Vector({
-                        features: format.readFeatures(routeJSON)
-                    });
-
-                    var vectorLayer = new ol.layer.Vector({
-                        source: vectorSource,
-                        style: new ol.style.Style({
-                            stroke: new ol.style.Stroke({
-                                color: 'red',
-                                width: 3
-                            })
-                        })
-                    });
-
-                    map.addLayer(vectorLayer);
-
-                    var routeJSON = data.Polygon;
-
-                    var format = new ol.format.GeoJSON({
-                        featureProjection: "EPSG:3857"
-                    });
-
-                    var vectorSource = new ol.source.Vector({
-                        features: format.readFeatures(routeJSON)
-                    });
-
-                    var vectorLayer = new ol.layer.Vector({
-                        source: vectorSource,
-                        style: new ol.style.Style({
-                            stroke: new ol.style.Stroke({
-                                color: 'blue',
-                                width: 3
-                            })
-                        })
-                    });
-
-                    map.addLayer(vectorLayer);
-
-
-                    var ext = vectorSource.getExtent();
-                    {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
-                    {#ext = ol.proj.transformExtent(vectorSource.getExtent(), 'EPSG:3857', 'EPSG:4326');#}
-                    map.getView().fit(ext, map.getSize());
-
-                });
-                return false;
-            });
-        });
-
-        $(function () {
-            $('#download').bind('click', function () {
-                window.location = ($SCRIPT_ROOT + '/download');
-                return false;
-            });
-        });
-
-
-    </script>
-
     <div id="map" class="map">
     </div>
 
 
-    {#<script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>#}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+</div>
+
+<div id="content"></div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+   $('#Tokyo').load("{{ url_for('static' , filename ='hypso.html') }}");
+
+});
+</script>
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ url_for('static' , filename ='testmap2.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static' , filename ='basemap.js') }}"></script>
 <script type="text/javascript" src="{{ url_for('static' , filename ='draw.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='buttons.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='DragDrop.js') }}"></script>
 </html>
