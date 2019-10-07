@@ -33,10 +33,10 @@ def process():
     y = float(location)
 
     whtroutine.toshape(out_url,x1,y1,x2,y2)
-    brnch = whtroutine.clip(data_url,out_url,out_url2)
+    brnch,Horton,Strahler = whtroutine.clip(data_url,out_url,out_url2)
     # Area, utm_zone, branches, poly = catchment.catch(x1, y1, x2, y2, data_url, out_url)
     # return jsonify(Area=Area, UTM=utm_zone, Branch=brnch, Polygon=poly)
-    return jsonify(Branch=brnch)
+    return jsonify(Branch=brnch, Horton=Horton, Strahler=Strahler)
 
 @app.route('/preprocess')
 def preprocess():

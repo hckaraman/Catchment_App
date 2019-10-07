@@ -6,9 +6,9 @@ var appId = 'NlGDN7VmUR5CEjwlC2h2';
 var appCode = 'oWcExuiIq_UmB4EFUFVNJA';
 var hereLayers = [
     {
-        base: 'base',
+        base: 'aerial',
         type: 'maptile',
-        scheme: 'normal.day',
+        scheme: 'terrain.day',
         app_id: appId,
         app_code: appCode
     },
@@ -27,9 +27,9 @@ var hereLayers = [
         app_code: appCode
     },
     {
-        base: 'aerial',
+        base: 'base',
         type: 'maptile',
-        scheme: 'terrain.day',
+        scheme: 'normal.day',
         app_id: appId,
         app_code: appCode
     },

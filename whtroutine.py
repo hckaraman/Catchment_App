@@ -35,13 +35,29 @@ def clip(dataurl,out_url,outurl2):
     wbt.flow_accumulation_full_workflow("DEM_fill.tif","DEM_out.tif","Flow_dir.tif","Flow_acc.tif",log=True)
     wbt.basins("Flow_dir.tif","Basins.tif")
     wbt.extract_streams("Flow_acc.tif","streams.tif",threshold=-1)
-    wbt.remove_short_streams("Flow_dir.tif","streams.tif","streams_del.tif",min_length=0.01)
+    wbt.remove_short_streams("Flow_dir.tif","streams.tif","streams_del.tif",min_length=0.001)
+    wbt.find_main_stem("Flow_dir.tif", "streams_del.tif", "main_stream.tif")
     wbt.raster_streams_to_vector("streams_del.tif","Flow_dir.tif","riverswht.shp")
+    wbt.raster_streams_to_vector("main_stream.tif","Flow_dir.tif","main_stream.shp")
+    wbt.horton_stream_order("Flow_dir.tif","streams_del.tif","Horton.tif")
+    wbt.strahler_stream_order("Flow_dir.tif","streams_del.tif","Strahler.tif")
+    wbt.raster_streams_to_vector("Horton.tif", "Flow_dir.tif", "Horton.shp")
+    wbt.raster_streams_to_vector("Strahler.tif", "Flow_dir.tif", "Strahler.shp")
+    # wbt.long_profile("Flow_dir.tif","streams_del.tif","DEM_fill.tif","Profile.html")
+    # wbt.longest_flowpath("DEM_fill.tif","Basins.tif","longest_path.shp")
     file = gpd.read_file(os.path.join(out_url, "riverswht.shp"))
+    file = gpd.read_file(os.path.join(out_url, "Horton.shp"))
+    file = gpd.read_file(os.path.join(out_url, "Strahler.shp"))
     file.to_file(os.path.join(out_url, "riverswht.geojson"), driver="GeoJSON")
-    file = gpd.read_file(os.path.join(out_url, "riverswht.geojson"))
-    file = file.to_json()
-    return file
+    file.to_file(os.path.join(out_url, "Horton.geojson"), driver="GeoJSON")
+    file.to_file(os.path.join(out_url, "Strahler.geojson"), driver="GeoJSON")
+    riverswht = gpd.read_file(os.path.join(out_url, "riverswht.geojson"))
+    Horton = gpd.read_file(os.path.join(out_url, "Horton.geojson"))
+    Strahler = gpd.read_file(os.path.join(out_url, "Strahler.geojson"))
+    riverswht = file.to_json()
+    Horton = file.to_json()
+    Strahler = file.to_json()
+    return riverswht,Horton,Strahler
     # wbt.hypsometric_analysis(dataurl, "hypso.html",watershed="working_area.shp")
 
 def snap(dataurl,out_url):
@@ -49,7 +65,7 @@ def snap(dataurl,out_url):
     wbt.work_dir = out_url
     wbt.snap_pour_points("point.shp","Flow_acc.tif","snap_point.shp",snap_dist=0.01)
     wbt.watershed("Flow_dir.tif","snap_point.shp","Watershed.tif")
-    wbt.longest_flowpath("DEM_fill.tif","Watershed.tif",'LongestFlowpath.shp')
+    # wbt.longest_flowpath("DEM_fill.tif","Watershed.tif",'LongestFlowpath.shp')
     # wbt.raster_to_vector_lines("Watershed.tif","Watershed.shp")
     mask = None
     with rasterio.open(os.path.join(out_url, "Watershed.tif")) as src:

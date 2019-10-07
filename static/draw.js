@@ -53,6 +53,11 @@ function addInteraction() {
 
     map.addInteraction(modify);
     map.addLayer(vector);
+    // var select = new ol.interaction.Select();
+    // map.addInteraction(select);
+    //
+    // var selectedFeatures = select.getFeatures();
+
 
     draw.on("drawend", function (e) {
         var xPro = ol.proj.transformExtent(e.feature.getGeometry().getExtent(), 'EPSG:3857', 'EPSG:4326');
@@ -60,7 +65,7 @@ function addInteraction() {
         document.getElementById("y1").value = xPro[1];
         document.getElementById("x2").value = xPro[2];
         document.getElementById("y2").value = xPro[3];
-        debugger;
+        // debugger;
         var features = vector.getSource().getFeatures();
         features.forEach((feature) => {
             vector.getSource().removeFeature(feature);
