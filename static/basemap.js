@@ -88,6 +88,20 @@ function createUrl(tpl, layerDesc) {
         .replace('{app_code}', layerDesc.app_code);
 }
 
+
+// Compass control
+var compass, compassBottom;
+
+function setCompass() {
+    compassBottom = new ol.control.Compass({
+        className: "bottom",
+    });
+    map.addControl(compassBottom);
+}
+
+setCompass();
+
+
 var select = document.getElementById('layer-select');
 
 function onChange() {

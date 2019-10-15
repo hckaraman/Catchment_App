@@ -1,0 +1,773 @@
+<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
+        <head>
+            <meta content=\"text/html; charset=iso-8859-1\" http-equiv=\"content-type\">
+            <title>Slope-Elevation Analysis</title><style type="text/css">
+            h1 {
+                font-size: 14pt;
+                margin-left: 15px;
+                margin-right: 15px;
+                text-align: center;
+                font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;
+            }
+            h2 {
+                font-size: 12pt;
+                margin-left: 15px;
+                margin-right: 15px;
+                text-align: center;
+                font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;
+            }
+            p {
+                font-size: 12pt;
+                font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            caption {
+                font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;
+                font-size: 12pt;
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            table {
+                font-size: 12pt;
+                font-family: Helvetica, Verdana, Geneva, Arial, sans-serif;
+                font-family: arial, sans-serif;
+                border-collapse: collapse;
+                align: center;
+            }
+            td, th {
+                border: 1px solid #222222;
+                text-align: centre;
+                padding: 8px;
+            }
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+            tr:hover {
+                background-color: lightyellow;
+            }
+            .numberCell {
+                text-align: right;
+            }
+            .header {
+                font-weight: bold;
+                text-align: center;
+            }
+        </style></head>
+        <body>
+            <h1>Slope-Elevation Analysis</h1><p><strong>Input DEM</strong>: DEM_watershed</p><div id='graph' align="center">
+    <script>
+      var plot = {
+        dataX: [[2.6126357038308954, 6.114852556111809, 12.616603162414116, 5.300462455509435, 6.27901151088158, 9.399087411957582, 6.792129740505852, 8.598477311341146, 9.135895291664305, 10.757857645734308, 8.649192384359072, 11.33523330350745, 11.548432746374871, 11.638810864997385, 12.288934775818444, 11.442198599871924, 17.5463267950633, 8.637657468371113, 11.941715721727414, 12.480987871060636, 7.396037005427387, 10.866841053109518, 13.655343414856052, 11.80839677816535, 7.438799379127844, 12.613867777660941, 13.673412729362147, 11.65198954260062, 7.9892803546265885, 17.214360372764375, 10.258794428301021, 10.46802319671289, 12.625128177558915, 10.776652990500672, 10.988740773124157, 11.157921511243705, 11.410564429133961, 8.005860048137642, 12.241808682389259, 11.599046340764637, 9.916242000578272, 11.802598166527623, 10.382530648957617, 10.322344227958574, 12.47060326540633, 12.043100920122725, 11.976298564809651, 12.789748965198491, 13.437660535547673, 10.582436179303954, 11.73298868430428, 12.112795297324542, 11.885260337994826, 12.945202453441592, 11.10524665660244, 10.371136577127746, 10.009784927746695, 11.01725746524022, 10.901703782516176, 10.127987243535092, 11.324792740465258, 10.851637048321168, 8.632070891251105, 9.702310817084033, 9.060068729774995, 8.867821510739065, 8.834525037373652, 8.237803892279794, 8.390820064396827, 7.7816765219480875, 8.171176143497933, 6.66765645413793, 7.576042791810323, 6.608541833139371, 8.182202545039322, 8.587655303704144, 7.526812212628853, 8.715666609233821, 9.380916978766557, 9.444146186556889, 8.927900514549487, 7.862792208137849, 8.922644596400998, 10.203728759876146, 8.314612174096503, 9.00643861802909, 7.461208675382345, 8.116381962257591, 9.09118393084081, 7.733643764933525, 7.574186059764452, 8.6064348276788, 8.694184968954294, 8.11057588782812, 7.353148363376275, 8.029691757319574, 7.966738746928637, 8.16201481866703, 7.999165855653983, 7.559131150291244, 8.309646537333743, 8.368050414084532, 8.2145601442949, 7.658669641023439, 6.812693563924827, 7.671449317264298, 8.422602627246333, 7.866456279092766, 8.052821153695248, 7.910117932008339, 8.402227739131344, 7.827948903860659, 7.932162464201095, 8.007784561824332, 8.523305080402672, 8.292933329113001, 7.473878389285314, 8.908768077273946, 8.501528582290081, 7.9822414916190585, 7.666589334506064, 7.996309145980525, 9.18193064094175, 8.332167423445489, 9.05812500741122, 9.645506208762285, 7.0890077916022385, 7.71737234162801, 7.269334535134537, 8.278539583553856, 9.008145159133317, 9.449569163174854, 7.7368989268010875, 8.10667854159275, 8.290245187049964, 8.200351787825749, 8.377172726447197, 7.73382223627438, 8.614444743769873, 8.489459997042854, 7.147012662112315, 7.122251076098067, 7.505872518803403, 7.608855561557692, 6.929124083314135, 7.245343606727454, 8.08993604900965, 7.8054614661567205, 6.946375262461647, 7.254076562520119, 8.057626229252351, 9.157375363901805, 6.874723760754283, 8.23181855407339, 8.169360454140909, 8.528170546597556, 8.668141400350642, 7.708246041454402, 8.13565014987046, 6.94147940379144, 8.300133285035788, 8.259420653966377, 5.055020504676954, 6.501780302281267, 5.468961076252671, 5.982795066395363, 6.176287423741324, 7.644509515225287, 5.9948455511253265, 9.246522695034143, 6.948461074709906, 6.339931881521728, 5.942916029818256, 5.661210836628437, 4.88543264945372, 5.515132329923542, 9.324827291179433, 9.557647213551498, 4.729582320937119, 5.591318271660793, 8.451419966854852, 7.082412230050176, 0.0, 0.0, 7.715213306579592]],
+        dataY: [[686.0, 691.0054054594594, 696.0108109189189, 701.0162163783784, 706.0216218378379, 711.0270272972973, 716.0324327567567, 721.0378382162162, 726.0432436756756, 731.0486491351352, 736.0540545945946, 741.0594600540541, 746.0648655135135, 751.0702709729729, 756.0756764324324, 761.0810818918919, 766.0864873513514, 771.0918928108108, 776.0972982702702, 781.1027037297297, 786.1081091891892, 791.1135146486487, 796.1189201081081, 801.1243255675676, 806.129731027027, 811.1351364864865, 816.140541945946, 821.1459474054054, 826.1513528648649, 831.1567583243243, 836.1621637837839, 841.1675692432432, 846.1729747027027, 851.1783801621622, 856.1837856216216, 861.189191081081, 866.1945965405405, 871.200002, 876.2054074594595, 881.2108129189189, 886.2162183783784, 891.2216238378378, 896.2270292972973, 901.2324347567568, 906.2378402162162, 911.2432456756757, 916.2486511351351, 921.2540565945947, 926.259462054054, 931.2648675135135, 936.270272972973, 941.2756784324324, 946.281083891892, 951.2864893513513, 956.2918948108108, 961.2973002702703, 966.3027057297297, 971.3081111891892, 976.3135166486486, 981.3189221081082, 986.3243275675676, 991.329733027027, 996.3351384864865, 1001.3405439459459, 1006.3459494054055, 1011.3513548648648, 1016.3567603243243, 1021.3621657837838, 1026.3675712432432, 1031.3729767027028, 1036.378382162162, 1041.3837876216217, 1046.389193081081, 1051.3945985405405, 1056.400004, 1061.4054094594594, 1066.410814918919, 1071.4162203783785, 1076.4216258378378, 1081.4270312972972, 1086.4324367567567, 1091.4378422162163, 1096.4432476756756, 1101.4486531351351, 1106.4540585945947, 1111.459464054054, 1116.4648695135136, 1121.470274972973, 1126.4756804324325, 1131.4810858918918, 1136.4864913513513, 1141.4918968108109, 1146.4973022702702, 1151.5027077297298, 1156.5081131891893, 1161.5135186486486, 1166.518924108108, 1171.5243295675675, 1176.529735027027, 1181.5351404864864, 1186.540545945946, 1191.5459514054055, 1196.5513568648648, 1201.5567623243244, 1206.562167783784, 1211.5675732432433, 1216.5729787027026, 1221.5783841621621, 1226.5837896216217, 1231.589195081081, 1236.5946005405406, 1241.6000060000001, 1246.6054114594594, 1251.6108169189188, 1256.6162223783783, 1261.6216278378379, 1266.6270332972972, 1271.6324387567568, 1276.6378442162163, 1281.6432496756756, 1286.6486551351352, 1291.6540605945947, 1296.659466054054, 1301.6648715135134, 1306.670276972973, 1311.6756824324325, 1316.6810878918918, 1321.6864933513514, 1326.691898810811, 1331.6973042702703, 1336.7027097297296, 1341.7081151891894, 1346.7135206486487, 1351.718926108108, 1356.7243315675676, 1361.729737027027, 1366.7351424864864, 1371.740547945946, 1376.7459534054055, 1381.7513588648649, 1386.7567643243242, 1391.7621697837837, 1396.7675752432433, 1401.7729807027026, 1406.7783861621622, 1411.7837916216217, 1416.789197081081, 1421.7946025405404, 1426.8000080000002, 1431.8054134594595, 1436.8108189189188, 1441.8162243783784, 1446.821629837838, 1451.8270352972972, 1456.8324407567568, 1461.8378462162163, 1466.8432516756757, 1471.848657135135, 1476.8540625945946, 1481.859468054054, 1486.8648735135134, 1491.870278972973, 1496.8756844324325, 1501.8810898918919, 1506.8864953513512, 1511.891900810811, 1516.8973062702703, 1521.9027117297296, 1526.9081171891892, 1531.9135226486487, 1536.918928108108, 1541.9243335675676, 1546.9297390270272, 1551.9351444864865, 1556.9405499459458, 1561.9459554054054, 1566.951360864865, 1571.9567663243242, 1576.9621717837838, 1581.9675772432433, 1586.9729827027027, 1591.9783881621622, 1596.9837936216218, 1601.989199081081, 1606.9946045405404]],
+        seriesLabels: ["DEM_watershed"],
+        xAxisLabel: "Average Slope",
+        yAxisLabel: "Elevation",
+        width: 600,
+        height: 500,
+        drawPoints: false,
+        drawGridlines: true,
+        drawLegend: false,
+        drawGreyBackground: false,
+        parentId: "graph"
+      };
+      function update(svg) {
+        // which of the series labels is longest?
+        var maxSeriesLabelLength = 0;
+        var a;
+        for (a = 0; a < plot.seriesLabels.length; a++) {
+          var sl = plot.seriesLabels[a];
+          if (sl.length > maxSeriesLabelLength) { maxSeriesLabelLength = sl.length; }
+        }
+        var plotLeftMargin = 70.0;
+        var plotRightMargin = plot.drawLegend ? 65.0 + maxSeriesLabelLength * 7 : 50.0;
+        var plotBottomMargin = 70.0;
+        var plotTopMargin = 40.0;
+        var plotWidth = plot.width - plotLeftMargin - plotRightMargin;
+        var plotHeight = plot.height - plotBottomMargin - plotTopMargin;
+        var originX = plotLeftMargin;
+        var originY = plotTopMargin + plotHeight;
+        var tickLen = 8.0;
+        var minorTickLen = tickLen * 0.65;
+
+        // If there are no series labels, treat it as one series.
+        if (plot.seriesLabels.length === 0) {
+					plot.drawLegend = false;
+				}
+
+        // colors
+        var lineColor = '#47a3ff'; //'#377eb8'; // '#729ece'; // '#1f77b4'; //'#47a3ff'; //'rgb(2,145,205)';
+        var highlightColor = '#ff7f00';
+        var btnColor = 'rgb(170,170,170)';
+        var btnHoverColor = 'rgb(150,150,150)';
+        var plotBackgroundColor = 'rgb(255,255,255)';
+        if (plot.drawGreyBackground) {
+          plotBackgroundColor = '#CCC';
+        }
+        var chartBackgroundColor = 'white';
+        // var gridLineColor = 'rgb(120,120,120)';
+        // if (plot.drawGreyBackground) {
+          var gridLineColor = '#EEE';
+        // }
+        var trendlineColor = 'DimGray';
+        if (plot.drawGreyBackground) {
+          trendlineColor = 'DimGray';
+        }
+        var showValueClr = "black";
+        // if (plot.drawGreyBackground) {
+        //   showValueClr = '#FFF';
+        // }
+
+        // Gridlines
+        // var gridlineDash = '1, 5';
+        // if (plot.drawGreyBackground) {
+          var gridlineDash = 'none';
+        // }
+
+        var tableau20 = [[31, 119, 180], [255, 127, 14],
+             [44, 160, 44], [214, 39, 40],
+             [148, 103, 189], [140, 86, 75],
+             [227, 119, 194], [127, 127, 127],
+             [188, 189, 34], [23, 190, 207]];
+
+        var regularOpacity = 1.0;
+        var deselectedOpacity = 0.10;
+
+
+        // create the svg element
+        var svgns = "http://www.w3.org/2000/svg";
+        if (svg == null) {
+          svg = document.createElementNS(svgns, "svg");
+        } else {
+          while (svg.lastChild) {
+              svg.removeChild(svg.lastChild);
+          }
+        }
+        svg.setAttribute('width', `${plot.width}`);
+        svg.setAttribute('height', `${plot.height}`);
+        var div = document.getElementById(plot.parentId);
+        if (div != null) {
+          div.appendChild(svg);
+        } else {
+          // add it to the body of the document
+          document.querySelector("body").appendChild(svg);
+        }
+
+        // how many series are there?
+        var numSeries = plot.dataY.length;
+
+        // if dataX is empty, fill it with the series 1, 2, 3, 4, ...
+        if (plot.dataX.length == 0) {
+          for (s = 0; s < numSeries; s++) {
+            var seriesXData = [];
+            for (a = 0; a < plot.dataY[s].length; a++) {
+              seriesXData.push(a + 1);
+            }
+            plot.dataX.push(seriesXData);
+          }
+        }
+
+        // style
+        var style = document.createElement("style");
+        let styleString = `
+        text {
+          font-family:Sans,Arial;
+        }
+        .axisLabel {
+          font-weight: normal;
+        }
+        .xTickLabel {
+          fill: black;
+          font-size: 85%;
+          font-weight: lighter;
+        }
+        .yTickLabel {
+          fill: black;
+          font-size: 85%;
+          font-weight: lighter;
+        }
+        .gridLine {
+          stroke: ${gridLineColor};
+          stroke-dasharray: ${gridlineDash};
+          stroke-width: 0.8;
+        }
+        .tick {
+          stroke: black;
+          stroke-width: 0.5;
+        }
+        #plotBorder {
+          fill: none;
+          stroke: black;
+          stroke-width: 0.5;
+        }
+        #showValue {
+          font-size: 85%;
+          fill: ${showValueClr};
+        }
+        #context-menu {
+          position:absolute;
+          display:none;
+        }
+        #context-menu ul {
+          list-style:none;
+          margin:0;
+          padding:0;
+          background: #EFEFEF;
+          opacity: 0.90;
+        }
+        #context-menu {
+          border:solid 1px #CCC;
+        }
+        #context-menu li {
+          font-family:Sans,Arial;
+          font-size: 75%;
+          text-align: left;
+          color:#000;
+          display:block;
+          padding:5px 15px;
+          border-bottom:solid 1px #CCC;
+        }
+        #context-menu li:last-child {
+          border:none;
+        }
+        #context-menu li:hover {
+          background:#007AFF;
+          color:#FFF;
+        }
+        `;
+
+        var dataPointHoverWidth = 4.0;
+        if (!plot.drawPoints) {
+          dataPointHoverWidth = 6.0;
+        }
+        var s;
+        for (s = 0; s < numSeries; s++) {
+          var clrNum = s % tableau20.length;
+          if (plot.seriesLabels.length === 0) {
+            // If there are no series labels, treat it as one series.
+						clrNum = 0;
+					}
+          let clr = `rgb(${tableau20[clrNum][0]},${tableau20[clrNum][1]},${tableau20[clrNum][2]})`;
+
+          styleString += `
+          .seriesLine${s} {
+            fill: none;
+            stroke-width:1;
+            stroke: ${clr};
+            opacity: ${regularOpacity};
+          }
+          .seriesLine${s}:hover {
+            fill: none;
+            stroke-width:2;
+            stroke: ${clr};
+            opacity: ${regularOpacity};
+          }
+          .seriesLineThick${s} {
+            fill: none;
+            stroke-width:2;
+            stroke: ${clr};
+            opacity: ${regularOpacity};
+          }
+          .seriesLineThick${s}:hover {
+            fill: none;
+            stroke-width:3;
+            stroke: ${clr};
+            opacity: ${regularOpacity};
+          }
+          .dataPoint${s} {
+            fill: ${clr};
+            stroke-width:0;
+            stroke: ${clr};
+            opacity: ${regularOpacity};
+          }
+          .dataPoint${s}:hover {
+            fill: red;
+            stroke-width:${dataPointHoverWidth};
+            stroke: red;
+            opacity:1.0;
+          }
+          `;
+        }
+        style.innerHTML = styleString;
+        svg.appendChild(style);
+        svg.id = "plotSvg";
+
+        // background
+        var background = document.createElementNS(svgns, "rect");
+        background.setAttribute('width', plot.width);
+        background.setAttribute('height', plot.height);
+        background.style.fill = chartBackgroundColor;
+        svg.appendChild(background);
+
+        // translate the origin point
+        var g = document.createElementNS(svgns, "g");
+        g.setAttribute('id', 'transform');
+        g.setAttribute('transform', `translate(${originX},${originY})`);
+        svg.appendChild(g);
+
+        // plot background
+        var plotBackground = document.createElementNS(svgns, "rect");
+        plotBackground.setAttribute('id', 'plotBackground');
+        plotBackground.setAttribute('x', 0.0);
+        plotBackground.setAttribute('y', -plotHeight);
+        plotBackground.setAttribute('width', plotWidth);
+        plotBackground.setAttribute('height', plotHeight);
+        plotBackground.style.fill = plotBackgroundColor;
+        plotBackground.style.stroke = "none";
+        g.appendChild(plotBackground);
+
+        // what are the min/max values?
+        var xMin = Infinity;
+        var xMax = -Infinity;
+        var yMin = Infinity;
+        var yMax = -Infinity;
+        var val = 0;
+        var maxNumPoints = 0;
+        var totalNumPoints = 0;
+        for (s = 0; s < numSeries; s++) {
+          var numPoints = Math.min(plot.dataX[s].length, plot.dataY[s].length);
+          if (numPoints > maxNumPoints) { maxNumPoints = maxNumPoints; }
+          totalNumPoints += numPoints;
+          if (numPoints < 2) {
+            alert("Too few points for line graph");
+            return;
+          }
+          if (plot.dataX[s].length != plot.dataY[s].length) {
+            alert("The x and y data arrays are unequal in length.");
+          }
+          for (a = 0; a < numPoints; a++) {
+              val = plot.dataX[s][a];
+              if (val < xMin) { xMin = val; }
+              if (val > xMax) { xMax = val; }
+              val = plot.dataY[s][a];
+              if (val < yMin) { yMin = val; }
+              if (val > yMax) { yMax = val; }
+          }
+        }
+
+        // We don't want a data point to fall on the plot border
+        xMin -= 0.0000001;
+        yMin -= 0.0000001;
+        xMax += 0.0000001;
+        yMax += 0.0000001;
+
+        // X axis
+        var xAxisTickSpacing = 0.0000001;
+        var xAxisNumTicks = 1000;
+        var xRange = xMax - xMin;
+        a = 0;
+        while (xAxisNumTicks > 20) {
+          if (a % 2 == 0) {
+            xAxisTickSpacing *= 5.0;
+          } else {
+            xAxisTickSpacing *= 2.0;
+          }
+          a++;
+          xAxisNumTicks = Math.ceil(xRange / xAxisTickSpacing);
+        }
+        xMin = Math.floor(xMin / xAxisTickSpacing) * xAxisTickSpacing;
+        xAxisNumTicks = Math.ceil((xMax - xMin) / xAxisTickSpacing);
+        xRange = xAxisTickSpacing * xAxisNumTicks;
+        var xSigDigits = Math.min(decimalPlaces(xMin+xAxisTickSpacing), decimalPlaces(xMin+2*xAxisTickSpacing)); //Math.round(0.1 / xAxisTickSpacing);
+        var dominantTick = 0;
+        if (decimalPlaces(xMin) > decimalPlaces(xMin+xAxisTickSpacing)) {
+          dominantTick = 1;
+        }
+        for (a = 0; a <= xAxisNumTicks; a++) {
+            // grid line
+            if (plot.drawGridlines) {
+              if (xAxisNumTicks <= 10 || a % 2 == dominantTick) {
+                if (a > 0 && a < xAxisNumTicks) {
+                  var line = document.createElementNS(svgns, "line");
+                  line.setAttribute('x1', (a * xAxisTickSpacing) / xRange * plotWidth);
+                  line.setAttribute('y1', 0);
+                  line.setAttribute('x2', (a * xAxisTickSpacing) / xRange * plotWidth);
+                  line.setAttribute('y2', -plotHeight);
+                  line.setAttribute('class', 'gridLine');
+                  g.appendChild(line);
+                }
+              }
+            }
+            // tick mark
+            var line = document.createElementNS(svgns, "line");
+            line.setAttribute('x1', (a * xAxisTickSpacing) / xRange * plotWidth);
+            line.setAttribute('y1', 0);
+            line.setAttribute('x2', (a * xAxisTickSpacing) / xRange * plotWidth);
+            if (xAxisNumTicks <= 10 || a % 2 == dominantTick) {
+              line.setAttribute('y2', tickLen);
+            } else {
+              line.setAttribute('y2', minorTickLen);
+            }
+            line.setAttribute('class', 'tick');
+            g.appendChild(line);
+
+            // labels
+            if (xAxisNumTicks <= 10 || a % 2 == dominantTick) {
+                // tick label
+                var label = document.createElementNS(svgns, "text");
+                label.setAttribute('x', (a * xAxisTickSpacing) / xRange * plotWidth);
+                label.setAttribute('y', tickLen + 5);
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('dominant-baseline', 'hanging');
+                label.setAttribute('class', 'xTickLabel');
+                label.innerHTML = `${(xMin + a * xAxisTickSpacing).toFixed(xSigDigits)}`;
+                g.appendChild(label);
+            }
+        }
+
+        // Y axis
+        var yAxisTickSpacing = 0.0000001;
+        var yAxisNumTicks = 1000;
+        var yRange = yMax - yMin;
+        a = 0;
+        while (yAxisNumTicks > 20) {
+          if (a % 2 == 0) {
+            yAxisTickSpacing *= 5.0;
+          } else {
+            yAxisTickSpacing *= 2.0;
+          }
+          a++;
+          yAxisNumTicks = Math.ceil(yRange / yAxisTickSpacing);
+        }
+        yMin = Math.floor(yMin / yAxisTickSpacing) * yAxisTickSpacing;
+        yAxisNumTicks = Math.ceil((yMax - yMin) / yAxisTickSpacing);
+        yRange = yAxisTickSpacing * yAxisNumTicks;
+        var ySigDigits = Math.min(decimalPlaces(yMin+yAxisTickSpacing), decimalPlaces(yMin+2*yAxisTickSpacing));
+        dominantTick = 0;
+        if (decimalPlaces(yMin) > decimalPlaces(yMin+yAxisTickSpacing)) {
+          dominantTick = 1;
+        }
+        for (a = 0; a <= yAxisNumTicks; a++) {
+            // grid line
+            if (plot.drawGridlines) {
+              if (yAxisNumTicks <= 10 || a % 2 == dominantTick) {
+                if (a > 0 && a < yAxisNumTicks) {
+                  var line = document.createElementNS(svgns, "line");
+                  line.setAttribute('x1', 0); //(a * xAxisTickSpacing) / xRange * plotWidth);
+                  line.setAttribute('y1', -(a * yAxisTickSpacing) / yRange * plotHeight);
+                  line.setAttribute('x2', plotWidth); //(a * xAxisTickSpacing) / xRange * plotWidth);
+                  line.setAttribute('y2', -(a * yAxisTickSpacing) / yRange * plotHeight); //-plotHeight);
+                  line.setAttribute('class', 'gridLine');
+                  g.appendChild(line);
+                }
+              }
+            }
+            // tick mark
+            var line = document.createElementNS(svgns, "line");
+            line.setAttribute('x1', 0);
+            line.setAttribute('y1', -(a * yAxisTickSpacing) / yRange * plotHeight);
+            if (yAxisNumTicks <= 6 || a % 2 == dominantTick) {
+              line.setAttribute('x2', -tickLen);
+            } else {
+              line.setAttribute('x2', -minorTickLen);
+            }
+            line.setAttribute('y2', -(a * yAxisTickSpacing) / yRange * plotHeight);
+            line.setAttribute('class', 'tick');
+            g.appendChild(line);
+
+            // labels
+            if (yAxisNumTicks <= 6 || a % 2 == dominantTick) {
+                // s += `<text transform="translate(${-tickLen - 5}, ${-(a * yAxisTickSpacing) / maxVal * plotHeight}), rotate(270)" x="0" y="0" text-anchor="middle" dominant-baseline="no-change" class="yTickLabel">${(a * yAxisTickSpacing).toFixed(ySigDigits)}</text>`;
+                var label = document.createElementNS(svgns, "text");
+                label.setAttribute('transform', `translate(${-tickLen - 5},${-(a * yAxisTickSpacing) / yRange * plotHeight}), rotate(270)`);
+                label.setAttribute('x', 0);
+                label.setAttribute('y', 0);
+                label.setAttribute('text-anchor', 'middle');
+                label.setAttribute('dominant-baseline', 'no-change');
+                label.setAttribute('class', 'yTickLabel');
+                label.innerHTML = `${(yMin + a * yAxisTickSpacing).toFixed(ySigDigits)}`;
+                g.appendChild(label);
+            }
+        }
+
+        // axis labels
+        var xLabel = document.createElementNS(svgns, "text");
+        xLabel.setAttribute('x', plotWidth / 2.0);
+        xLabel.setAttribute('y', tickLen + 25.0);
+        xLabel.setAttribute('text-anchor', 'middle');
+        xLabel.setAttribute('dominant-baseline', 'hanging');
+        xLabel.setAttribute('class', 'axisLabel');
+        xLabel.innerHTML = plot.xAxisLabel;
+        g.appendChild(xLabel);
+
+        var yLabel = document.createElementNS(svgns, "text");
+        yLabel.setAttribute('transform', `translate(${-tickLen - 28.0},${-plotHeight / 2.0}), rotate(270)`);
+        yLabel.setAttribute('x', 0);
+        yLabel.setAttribute('y', 0);
+        yLabel.setAttribute('text-anchor', 'middle');
+        yLabel.setAttribute('class', 'axisLabel');
+        yLabel.innerHTML = plot.yAxisLabel;
+        g.appendChild(yLabel);
+
+        // text to show values when hover over
+        var showValue = document.createElementNS(svgns, "text");
+        showValue.setAttribute('x', 10);
+        showValue.setAttribute('text-anchor', 'start');
+
+        // draw the line(s)
+        var g2 = document.createElementNS(svgns, "g");
+        g2.setAttribute('id', 'lines');
+        g.appendChild(g2);
+
+        var radius = 3.0;
+        if (totalNumPoints > 15) { radius = 2.5; }
+        if (!plot.drawPoints) {
+          radius = 1.0;
+        }
+        for (let s = 0; s < numSeries; s++) {
+          var numPoints = Math.min(plot.dataX[s].length, plot.dataY[s].length);
+          let seriesLine = document.createElementNS(svgns, "polyline");
+          var pointsString = `${(plot.dataX[s][0] - xMin) / xRange * plotWidth},${-(plot.dataY[s][0] - yMin) / yRange * plotHeight}`;
+          for (let a = 1; a < numPoints; a++) {
+            pointsString += ` ${(plot.dataX[s][a] - xMin) / xRange * plotWidth},${-(plot.dataY[s][a] - yMin) / yRange * plotHeight}`
+          }
+          seriesLine.setAttribute('points', pointsString);
+          var seriesLabel = "seriesLine";
+          if (!plot.drawPoints) { seriesLabel = "seriesLineThick"; }
+          seriesLine.setAttribute('class', `${seriesLabel}${s}`);
+          seriesLine.addEventListener('mouseover', function() {
+            var s2;
+            for (s2 = 0; s2 < numSeries; s2++) {
+              if (s2 != s) {
+                var x = document.getElementsByClassName(`${seriesLabel}${s2}`);
+                var i;
+                for (i = 0; i < x.length; i++) {
+                  x[i].style.opacity = deselectedOpacity;
+                }
+                x = document.getElementsByClassName(`dataPoint${s2}`);
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.opacity = deselectedOpacity;
+                }
+              }
+            }
+          }, false);
+          seriesLine.addEventListener('mouseout', function() {
+            var s2;
+            for (s2 = 0; s2 < numSeries; s2++) {
+              if (s2 != s) {
+                var x = document.getElementsByClassName(`${seriesLabel}${s2}`);
+                var i;
+                for (i = 0; i < x.length; i++) {
+                  x[i].style.opacity = regularOpacity;
+                }
+                x = document.getElementsByClassName(`dataPoint${s2}`);
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.opacity = regularOpacity;
+                }
+              }
+            }
+          }, false);
+          g2.appendChild(seriesLine);
+
+          // draw the data points
+          for (let a = 0; a < numPoints; a++) {
+            let c = document.createElementNS(svgns, "circle");
+            c.setAttribute('cx', `${(plot.dataX[s][a] - xMin) / xRange * plotWidth}`);
+            c.setAttribute('cy', `${-(plot.dataY[s][a] - yMin) / yRange * plotHeight}`);
+            c.setAttribute('r', radius);
+            c.setAttribute('class', `dataPoint${s}`);
+            c.addEventListener('mouseover', function() {
+              var s2;
+              for (s2 = 0; s2 < numSeries; s2++) {
+                if (s2 != s) {
+                  var x = document.getElementsByClassName(`${seriesLabel}${s2}`);
+                  var i;
+                  for (i = 0; i < x.length; i++) {
+                    x[i].style.opacity = deselectedOpacity;
+                  }
+                  x = document.getElementsByClassName(`dataPoint${s2}`);
+                  for (i = 0; i < x.length; i++) {
+                      x[i].style.opacity = deselectedOpacity;
+                  }
+                }
+              }
+              showValue.innerHTML = `x: ${(plot.dataX[s][a]).toFixed(xSigDigits+2)}, y: ${(plot.dataY[s][a]).toFixed(ySigDigits+2)}`;
+            }, false);
+            c.addEventListener('mouseout', function() {
+              var s2;
+              for (s2 = 0; s2 < numSeries; s2++) {
+                if (s2 != s) {
+                  var x = document.getElementsByClassName(`${seriesLabel}${s2}`);
+                  var i;
+                  for (i = 0; i < x.length; i++) {
+                    x[i].style.opacity = regularOpacity;
+                  }
+                  x = document.getElementsByClassName(`dataPoint${s2}`);
+                  for (i = 0; i < x.length; i++) {
+                      x[i].style.opacity = regularOpacity;
+                  }
+                }
+              }
+              showValue.innerHTML = "";
+            }, false);
+            g2.appendChild(c);
+          }
+        }
+
+        // Show value label
+        showValue.setAttribute('id', 'showValue');
+        showValue.setAttribute('y', -plotHeight + 20);
+        g.appendChild(showValue);
+
+        // plot border
+        var plotBorder = document.createElementNS(svgns, "rect");
+        plotBorder.setAttribute('x', 0);
+        plotBorder.setAttribute('y', -plotHeight);
+        plotBorder.setAttribute('width', plotWidth);
+        plotBorder.setAttribute('height', plotHeight);
+        plotBorder.id = "plotBorder";
+        g.appendChild(plotBorder);
+
+        // add a legend
+        if (plot.seriesLabels.length > 0 && plot.drawLegend) {
+          var legend = document.createElementNS(svgns, "g");
+          legend.setAttribute('id', 'legend');
+          g.appendChild(legend);
+          for (let s = 0; s < numSeries; s++) {
+            var y = -(plotHeight - 35 - 23 * (s+1));
+            var line = document.createElementNS(svgns, "line");
+            line.setAttribute('x1', plotWidth + 10);
+            line.setAttribute('y1', y);
+            line.setAttribute('x2', plotWidth + 40);
+            line.setAttribute('y2', y);
+            if (plot.drawPoints) {
+              line.setAttribute('class', `seriesLine${s}`);
+            } else {
+              line.setAttribute('class', `seriesLineThick${s}`);
+            }
+            legend.appendChild(line);
+
+            if (plot.drawPoints) {
+              var c = document.createElementNS(svgns, "circle");
+              c.setAttribute('cx', plotWidth+25);
+              c.setAttribute('cy', y);
+              c.setAttribute('r', radius);
+              c.setAttribute('class', `dataPoint${s}`);
+              legend.appendChild(c);
+            }
+
+            var legendLabel = document.createElementNS(svgns, "text");
+            legendLabel.setAttribute('x', plotWidth + 48);
+            legendLabel.setAttribute('y', y);
+            legendLabel.setAttribute('text-anchor', 'left');
+            // legendLabel.setAttribute('text-anchor', 'middle');
+            legendLabel.setAttribute('dominant-baseline', 'middle');
+            legendLabel.setAttribute('class', 'xTickLabel');
+            legendLabel.innerHTML = plot.seriesLabels[s];
+            legend.appendChild(legendLabel);
+          }
+        }
+
+        // Add an invisible context menu to the parentId.
+        var cm = document.createElement('div');
+        cm.id = 'context-menu';
+        cm.className = 'context-menu';
+        var list = document.createElement('ul');
+
+        var copyBtn = document.createElement("li");
+        copyBtn.innerHTML = "Copy";
+        copyBtn.addEventListener('click', function() {
+          var content = `<svg xmlns='${svgns}' width='${plot.width}' height='${plot.height}'>\n${svg.innerHTML}\n</svg>`;
+          // Create an auxiliary hidden input
+          var aux = document.createElement("input");
+          // Get the text from the element passed into the input
+          aux.setAttribute("value", content);
+          // Append the aux input to the body
+          document.body.appendChild(aux);
+          // Highlight the content
+          aux.select();
+          // Execute the copy command
+          document.execCommand("copy");
+          // Remove the input from the body
+          document.body.removeChild(aux);
+          // Give a notification
+          alert("The plot's SVG content has been copied to the clipboard.");
+        }, false);
+        list.appendChild(copyBtn);
+
+        var gridlineBtn = document.createElement("li");
+        var verb = plot.drawGridlines ? "Hide " : "Show ";
+        gridlineBtn.innerHTML = verb + "Gridlines";
+        gridlineBtn.addEventListener('click', function() {
+          plot.drawGridlines = !plot.drawGridlines;
+          // update the context menu label
+          var verb = plot.drawGridlines ? "Hide " : "Show ";
+          gridlineBtn.innerHTML = verb + "Gridlines";
+          update(svg);
+        }, false);
+        list.appendChild(gridlineBtn);
+
+        if (plot.seriesLabels.length > 0) {
+          var legendBtn = document.createElement("li");
+          var verb = plot.drawLegend ? "Hide " : "Show ";
+          legendBtn.innerHTML = verb + "Legend";
+          legendBtn.addEventListener('click', function() {
+            plot.drawLegend = !plot.drawLegend;
+            // update the context menu label
+            var verb = plot.drawLegend ? "Hide " : "Show ";
+            legendBtn.innerHTML = verb + "Legend";
+            update(svg);
+          }, false);
+          list.appendChild(legendBtn);
+        }
+
+        var pointsBtn = document.createElement("li");
+        var verb = plot.drawPoints ? "Hide " : "Show ";
+        pointsBtn.innerHTML = verb + "Points";
+        pointsBtn.addEventListener('click', function() {
+          plot.drawPoints = !plot.drawPoints;
+          // update the context menu label
+          var verb = plot.drawPoints ? "Hide " : "Show ";
+          pointsBtn.innerHTML = verb + "Points";
+          update(svg);
+        }, false);
+        list.appendChild(pointsBtn);
+
+        var backgroundColorBtn = document.createElement("li");
+        var verb = plot.drawGreyBackground ? "Light " : "Dark ";
+        backgroundColorBtn.innerHTML = verb + "Background";
+        backgroundColorBtn.addEventListener('click', function() {
+          plot.drawGreyBackground = !plot.drawGreyBackground;
+          // update the context menu label
+          var verb = plot.drawGreyBackground ? "Light " : "Dark ";
+          backgroundColorBtn.innerHTML = verb + "Background";
+          update(svg);
+        }, false);
+        list.appendChild(backgroundColorBtn);
+
+        cm.appendChild(list);
+        document.getElementById(plot.parentId).appendChild(cm);
+
+        var menu = document.getElementById('context-menu');
+        document.onclick = function () {
+            menu.style.display = 'none';
+        };
+
+        document.getElementById('plotSvg').oncontextmenu = function (evt) {
+            evt = (evt) ? evt : ((event) ? event : null);
+            var posnX = (evt.pageX) ? evt.pageX : ((evt.offsetX) ? evt.offsetX + 10 : null);
+            var posnY = (evt.pageY) ? evt.pageY : ((evt.offsetY) ? evt.offsetY + 10 : null);
+            menu.style.left = posnX + 'px';
+            menu.style.top = posnY + 'px';
+            menu.style.display = 'block';
+            if (typeof evt.preventDefault != "undefined") {
+                evt.preventDefault();
+            } else {
+                evt.returnValue = false;
+            }
+        };
+      }
+
+      function decimalPlaces(num) {
+        var match = (''+num).match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/);
+        if (!match) { return 0; }
+        return Math.max(
+             0,
+             // Number of digits right of decimal point.
+             (match[1] ? match[1].length : 0)
+             // Adjust for scientific notation.
+             - (match[2] ? +match[2] : 0));
+      }
+
+      update(null);
+    </script></div></body>

@@ -1,8 +1,7 @@
 $(function () {
     $('#calculate').bind('click', function () {
         $.getJSON($SCRIPT_ROOT + '/process', {
-            X: $("#xcor").val(),
-            Y: $("#ycor").val(),
+            River: $("#xcor").val(),
             X1: $("#x1").val(),
             Y1: $("#y1").val(),
             X2: $("#x2").val(),
@@ -12,6 +11,7 @@ $(function () {
             // $("#UTM").val(data.UTM);
 
             var routeJSON = data.Branch;
+
 
             var features = vector.getSource().getFeatures();
             features.forEach((feature) => {
@@ -144,12 +144,61 @@ $(function () {
 
             var layer = new ol.layer.Group({
                 title: 'River Order',
-                layers: [HortonvectorLayer,StrahlervectorLayer],
+                layers: [HortonvectorLayer, StrahlervectorLayer],
                 name: 'Order Group'
+            });
+
+            function getFeatureStyle(feature) {
+                return [
+                    new ol.style.Style({
+                        image: new ol.style.Circle({
+                            radius: Math.sqrt(feature.get('pop') / Math.PI) / 50,
+                            fill: new ol.style.Fill({
+                                color: [0, 128, 255, .3],
+                            }),
+                            stroke: new ol.style.Stroke({
+                                width: 1,
+                                color: [0, 128, 255],
+                            })
+                        }),
+                        geometry: new ol.geom.Point(ol.extent.getCenter(feature.getGeometry().getExtent()))
+                    }),
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            width: 1,
+                            color: [255, 128, 0]
+                        }),
+                        fill: new ol.style.Fill({
+                            color: [255, 128, 0, 0.2]
+                        })
+                    })
+                ];
+            }
+
+            var legend = new ol.control.Legend({
+                title: 'Legend',
+                style: getFeatureStyle,
+                collapsible: false,
+                margin: 0,
+                size: [40, 10]
+            });
+            map.addControl(legend);
+
+            legend.addRow({
+                title: 'Order',
+                typeGeom: 'LineString',
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: "rgb(247,87,213)",
+                        width: 3
+                    }),
+                })
             });
 
 
             map.addLayer(layer);
+
+
 
         });
         return false;
@@ -164,3 +213,6 @@ $(function () {
         return false;
     });
 });
+
+
+

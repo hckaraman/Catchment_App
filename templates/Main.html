@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://openlayers.org/en/v5.3.0/css/ol.css" type="text/css">
+    <style>
+        .map {
+            height: 98%;
+            width: 98%;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    {#    <link rel="stylesheet" href="../static/images/main.css">#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+    <!-- ol-ext -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css"/>
+    <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.3.0"></script>
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/ol-layerswitcher@3.4.0"></script>
+    <script src="https://kit.fontawesome.com/4b9297293d.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/ol-layerswitcher@3.4.0/src/ol-layerswitcher.css"/>
+    <script>window.jQuery || document.write('<script src="{{
+  url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+
+
+    <title>FlaskApp</title>
+</head>
+<body>
+
+<div id="map" class="map"></div>
+<div id="info">&nbsp;</div>
+<select id="layer-select">
+    <option value="terrain.day" selected>Terrain</option>
+    <option value="normal.day.transit">Normal Transit</option>
+    <option value="pedestrian.day">Pedestrian</option>
+    <option value="normal.day">Normal</option>
+    <option value="satellite.day">Satellite</option>
+    <option value="hybrid.day">Hybrid</option>
+</select>
+
+
+{#<button onclick="getcoordinates()">Get Coordinates</button>#}
+{#<button onclick="addInteraction()">Draw box to define workspace</button>#}
+
+{#<form id="form">#}
+{#    <input type="text" name="X" , id="xcoor">#}
+{#    <input type="text" name="Y" , id="ycoor">#}
+{#    <button id=calculate>Submit</button>#}
+{#    <input type="text" name="area" , id="area">#}
+{#    <input type="text" name="utm" , id="utm">#}
+{#</form>#}
+
+<div class="measure-control ol-unselectable ol-control">
+    <button class=" fas fa-ruler " id="ruler"></button>
+</div>
+
+
+<div class="container box-shadow-light" id="list-holder" style="display: block;"><h2>Active Tabs</h2>
+    <div class="w3-bar w3-black">
+        <button class="w3-bar-item w3-button tablink w3-red" onclick="openCity(event,'London')">Parameters</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Paris')">Catchments</button>
+        <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Tokyo')">Download</button>
+    </div>
+
+    <div id="London" class="w3-container w3-border city">
+        <div class="row">
+            <h3 id="list-header"></h3>
+            <p id="description"></p>
+        </div>
+        <div class="row">
+            <ul id="list" class="swing">
+                <div class="content" style="max-height: 400px;">
+                    <div class="container">
+                        <div class="row p-b-10" id="btn">
+                            <div class="col-md-6"><b>Mimimum River Length</b>
+                                <input id="xcor" type="number"
+                                       class="form-control"></div>
+                            <div class="col-md-6"><b>Y Coordinate</b>
+                                <input id="ycor" type="number"
+                                       class="form-control" disabled></div>
+                            <div class="col-md-6"><b>Area: (km<sup>2</sup>)</b>
+                                <input id="Area" type="number"
+                                       class="form-control" disabled></div>
+                            <div class="col-md-6"><b>UTM Zone </b>
+                                <input id="UTM" type="number"
+                                       class="form-control" disabled></div>
+                        </div>
+                    </div>
+                </div>
+            </ul>
+        </div>
+
+        <input id="x1" type="number"
+               class="form-control" hidden>
+        <input id="y1" type="number"
+               class="form-control" hidden>
+        <input id="x2" type="number"
+               class="form-control" hidden>
+        <input id="y2" type="number"
+               class="form-control" hidden>
+
+
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-block" id="coordinates">Get Coordinates <i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" id="draw">Draw Workspace <i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="w-150"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary btn-block w3-red" id="calculate">Submit <i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="col">
+                <button class="btn btn-primary btn-block" id="download">Download river network<i
+                        class="fas fa-project-diagram"></i></button>
+            </div>
+            <div class="w-150"></div>
+        </div>
+
+    </div>
+    <div id="Paris" class="w3-container w3-border city" style="display:none">
+        <div class="accordion" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseOne"
+                                aria-expanded="false" aria-controls="collapseOne">
+                            Basin Properties
+                        </button>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                     data-parent="#accordionExample">
+                    <div class="card-body" id="basintable">
+                        <div id="tablecontent"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Hypsometric Curve
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body" id="hypso">
+                        <div class="showhtml" id="htmlresult"></div>
+                        <canvas id="myChart" width="400" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <h2 class="mb-0">
+                        <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Collapsible Group Item #3
+                        </button>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body" id="stat">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="Tokyo" class="w3-container w3-border city" style="display:none">
+        <h2>Dowload</h2>
+        <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+
+    <script type=text/javascript>
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <div id="map" class="map">
+    </div>
+
+
+</div>
+
+<form class="form-inline">
+    <label>Measurement type &nbsp;</label>
+    <select id="type">
+        <option value="length">Length (LineString)</option>
+        <option value="area">Area (Polygon)</option>
+    </select>
+</form>
+
+<script>
+
+
+    function openCity(evt, cityName) {
+        var i, x, tablinks;
+        x = document.getElementsByClassName("city");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablink");
+        for (i = 0; i < x.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " w3-red";
+    }
+</script>
+<div id="content"></div>
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='testmap2.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='basemap.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='draw.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='buttons.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static' , filename ='DragDrop.js') }}"></script>
+{#<script type="text/javascript" src="{{ url_for('static' , filename ='measuring.js') }}"></script>#}
+</html>

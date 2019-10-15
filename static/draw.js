@@ -73,11 +73,17 @@ function addInteraction() {
     });
 }
 
-$(document).ready(function () {
-    $('#draw').click(function (ev) {
+// $(document).ready(function () {
+//     $('#draw').click(function (ev) {
+//         addInteraction();
+//         return false;
+//     });
+// });
+
+$(function () {
+     $('#draw').click(function (ev) {
         addInteraction();
         return false;
     });
 });
-
 
